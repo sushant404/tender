@@ -846,8 +846,7 @@
   }
 </style>
 </head>
-<body class="page-home">
-
+<body class="page-store">
 <nav class="hero-nav">
   <a href="index.html" class="hero-logo" style="text-decoration:none;color:inherit">Tender Anomalies</a>
   <div class="hero-nav-links">
@@ -859,84 +858,44 @@
   </div>
 </nav>
 
-<!-- ── HERO ────────────────────────────────── -->
-<section class="hero nav-below-fixed">
-  <div class="hero-circle"><div class="hero-dot"></div></div>
-  <div class="hero-center">
-    <div class="hero-issue">Bellevue, WA · Est. 2025</div>
-    <h1 class="hero-title">
-      <span>Songs about</span>
-      Belonging<br>&amp; Becoming
-    </h1>
-    <div class="hero-sub">Debut EP · Summer 2026</div>
-    <div class="hero-divider"></div>
-  </div>
-  <div class="hero-bottom">
-    <div class="hero-bottom-left">
-      Home Demos · Out Now<br>
-      SoundCloud · tenderanomalies.com
+<!-- ── STORE ─────────────────────────────────── -->
+<section class="store-section nav-below-fixed" id="store">
+  <div class="store-header">
+    <div>
+      <div class="section-num">02 · Store</div>
+      <div class="section-title">The<br>Merch Drop</div>
     </div>
-    <div class="hero-ep-badge">
-      <div class="ep-label">Forthcoming</div>
-      <div class="ep-title">Debut EP</div>
-      <div class="ep-date">Summer 2026</div>
+    <div class="store-note">
+      Print on demand · Ships worldwide<br>
+      Launching with the EP · Summer 2026<br>
+      Powered by Printful + Shopify
     </div>
   </div>
-</section>
-
-<!-- ── MARQUEE ──────────────────────────────── -->
-<div class="marquee-wrap">
-  <div class="marquee" id="marquee"></div>
-</div>
-
-<!-- ── COUNTDOWN ─────────────────────────────── -->
-<section class="countdown-section" id="countdown">
-  <div class="countdown-mark">TA</div>
-  <div class="countdown-eyebrow">The EP Drops In</div>
-  <div class="countdown-title">
-    Songs about belonging<br>and becoming.
-  </div>
-  <div class="countdown-nums">
-    <div class="cd-block"><span class="cd-num" id="cd-d">--</span><div class="cd-unit">Days</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-h">--</span><div class="cd-unit">Hours</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-m">--</span><div class="cd-unit">Minutes</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-s">--</span><div class="cd-unit">Seconds</div></div>
-  </div>
-  <div class="countdown-form">
-    <input type="email" placeholder="your@email.com — get notified at release" />
-    <button>Notify me</button>
-  </div>
+  <div class="store-grid" id="store-grid"></div>
 </section>
 
 <script>
-// MARQUEE
-const marqueeItems = [
-  'Songs about belonging and becoming',
-  'Debut EP · Summer 2026',
-  'Home Demos out now',
-  'Trip-hop · Indie Folk',
-  'ryusho.arts · Poetry',
-  'Sushant Shrestha',
-  'Tender Anomalies',
+// STORE
+const items = [
+  {glyph:'TA', name:'Wordmark Tee', sub:'100% organic cotton · Unisex · Screen printed', price:'$32', status:'At Launch'},
+  {glyph:'◎', name:'EP Hoodie', sub:'Heavyweight fleece · Album artwork · Front pocket', price:'$58', status:'At Launch'},
+  {glyph:'∿', name:'Lyric Tote', sub:'Natural canvas · A line from the EP · 15L', price:'$24', status:'At Launch'},
+  {glyph:'→', name:'Sticker Pack', sub:'5 vinyl stickers · Weatherproof · Lyrics + glyphs', price:'$12', status:'At Launch'},
+  {glyph:'I', name:'Art Print', sub:'12×16in · Archival matte · Signed · Limited 50', price:'$38', status:'Limited Ed.'},
+  {glyph:'♪', name:'Digital EP', sub:'High-quality download · All tracks · Liner notes PDF', price:'$8', status:'Pre-Save'},
 ];
-const m = document.getElementById('marquee');
-const doubled = [...marqueeItems, ...marqueeItems];
-m.innerHTML = doubled.map(t =>
-  `<div class="marquee-item"><span class="marquee-dot"></span>${t}</div>`
-).join('');
-
-// COUNTDOWN
-const target = new Date('2026-07-21T00:00:00');
-function tick() {
-  const diff = target - new Date();
-  if (diff <= 0) return;
-  const pad = n => String(n).padStart(2,'0');
-  document.getElementById('cd-d').textContent = pad(Math.floor(diff/864e5));
-  document.getElementById('cd-h').textContent = pad(Math.floor(diff%864e5/36e5));
-  document.getElementById('cd-m').textContent = pad(Math.floor(diff%36e5/6e4));
-  document.getElementById('cd-s').textContent = pad(Math.floor(diff%6e4/1e3));
-}
-tick(); setInterval(tick,1000);
+document.getElementById('store-grid').innerHTML = items.map(i => `
+  <div class="store-item">
+    <div class="store-img">${i.glyph}</div>
+    <div class="store-item-info">
+      <div class="store-item-name">${i.name}</div>
+      <div class="store-item-sub">${i.sub}</div>
+      <div class="store-item-footer">
+        <div class="store-price">${i.price}</div>
+        <div class="store-status">${i.status}</div>
+      </div>
+    </div>
+  </div>`).join('');
 </script>
 </body>
 </html>

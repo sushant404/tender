@@ -846,8 +846,7 @@
   }
 </style>
 </head>
-<body class="page-home">
-
+<body class="page-connect">
 <nav class="hero-nav">
   <a href="index.html" class="hero-logo" style="text-decoration:none;color:inherit">Tender Anomalies</a>
   <div class="hero-nav-links">
@@ -859,84 +858,56 @@
   </div>
 </nav>
 
-<!-- ── HERO ────────────────────────────────── -->
-<section class="hero nav-below-fixed">
-  <div class="hero-circle"><div class="hero-dot"></div></div>
-  <div class="hero-center">
-    <div class="hero-issue">Bellevue, WA · Est. 2025</div>
-    <h1 class="hero-title">
-      <span>Songs about</span>
-      Belonging<br>&amp; Becoming
-    </h1>
-    <div class="hero-sub">Debut EP · Summer 2026</div>
-    <div class="hero-divider"></div>
+<!-- ── CONNECT ────────────────────────────────── -->
+<section class="connect-section nav-below-fixed" id="connect">
+  <div class="connect-grid">
+    <div class="connect-left">
+      <div class="section-num" style="color:rgba(255,255,255,0.2);">04 · Connect</div>
+      <div class="connect-title">
+        Stay in<br>the world.
+      </div>
+      <div class="connect-body">
+        Follow along as the EP takes shape. Demos, process notes, and occasional dispatches — shared before the release, not after.
+      </div>
+    </div>
+    <div>
+      <div class="connect-links">
+        <a class="connect-link" href="https://soundcloud.com/tender-anomalies">
+          <span class="cl-name">SoundCloud · Home Demos</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="connect-link" href="https://www.youtube.com/@tenderanomalies">
+          <span class="cl-name">YouTube</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="connect-link" href="https://ryusho.arts">
+          <span class="cl-name">Poetry · ryusho.arts</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="connect-link" href="https://sushantshrestha.com">
+          <span class="cl-name">sushantshrestha.com</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="connect-link" href="mailto:hello@tenderanomalies.com">
+          <span class="cl-name">Press & Booking</span>
+          <span class="cl-arrow">→</span>
+        </a>
+      </div>
+      <div class="rule">
+        <div class="rule-line"></div>
+        <div class="rule-text">End of transmission</div>
+        <div class="rule-line"></div>
+      </div>
+    </div>
   </div>
-  <div class="hero-bottom">
-    <div class="hero-bottom-left">
-      Home Demos · Out Now<br>
-      SoundCloud · tenderanomalies.com
+  <div class="footer-bottom">
+    <div class="footer-copy">
+      © 2026 Tender Anomalies Music<br>
+      Sushant Shrestha<br>
+      tenderanomalies.com
     </div>
-    <div class="hero-ep-badge">
-      <div class="ep-label">Forthcoming</div>
-      <div class="ep-title">Debut EP</div>
-      <div class="ep-date">Summer 2026</div>
-    </div>
+    <div class="footer-logo">Tender Anomalies</div>
   </div>
 </section>
-
-<!-- ── MARQUEE ──────────────────────────────── -->
-<div class="marquee-wrap">
-  <div class="marquee" id="marquee"></div>
-</div>
-
-<!-- ── COUNTDOWN ─────────────────────────────── -->
-<section class="countdown-section" id="countdown">
-  <div class="countdown-mark">TA</div>
-  <div class="countdown-eyebrow">The EP Drops In</div>
-  <div class="countdown-title">
-    Songs about belonging<br>and becoming.
-  </div>
-  <div class="countdown-nums">
-    <div class="cd-block"><span class="cd-num" id="cd-d">--</span><div class="cd-unit">Days</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-h">--</span><div class="cd-unit">Hours</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-m">--</span><div class="cd-unit">Minutes</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-s">--</span><div class="cd-unit">Seconds</div></div>
-  </div>
-  <div class="countdown-form">
-    <input type="email" placeholder="your@email.com — get notified at release" />
-    <button>Notify me</button>
-  </div>
-</section>
-
-<script>
-// MARQUEE
-const marqueeItems = [
-  'Songs about belonging and becoming',
-  'Debut EP · Summer 2026',
-  'Home Demos out now',
-  'Trip-hop · Indie Folk',
-  'ryusho.arts · Poetry',
-  'Sushant Shrestha',
-  'Tender Anomalies',
-];
-const m = document.getElementById('marquee');
-const doubled = [...marqueeItems, ...marqueeItems];
-m.innerHTML = doubled.map(t =>
-  `<div class="marquee-item"><span class="marquee-dot"></span>${t}</div>`
-).join('');
-
-// COUNTDOWN
-const target = new Date('2026-07-21T00:00:00');
-function tick() {
-  const diff = target - new Date();
-  if (diff <= 0) return;
-  const pad = n => String(n).padStart(2,'0');
-  document.getElementById('cd-d').textContent = pad(Math.floor(diff/864e5));
-  document.getElementById('cd-h').textContent = pad(Math.floor(diff%864e5/36e5));
-  document.getElementById('cd-m').textContent = pad(Math.floor(diff%36e5/6e4));
-  document.getElementById('cd-s').textContent = pad(Math.floor(diff%6e4/1e3));
-}
-tick(); setInterval(tick,1000);
-</script>
 </body>
 </html>

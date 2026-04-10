@@ -846,8 +846,7 @@
   }
 </style>
 </head>
-<body class="page-home">
-
+<body class="page-about">
 <nav class="hero-nav">
   <a href="index.html" class="hero-logo" style="text-decoration:none;color:inherit">Tender Anomalies</a>
   <div class="hero-nav-links">
@@ -859,84 +858,36 @@
   </div>
 </nav>
 
-<!-- ── HERO ────────────────────────────────── -->
-<section class="hero nav-below-fixed">
-  <div class="hero-circle"><div class="hero-dot"></div></div>
-  <div class="hero-center">
-    <div class="hero-issue">Bellevue, WA · Est. 2025</div>
-    <h1 class="hero-title">
-      <span>Songs about</span>
-      Belonging<br>&amp; Becoming
-    </h1>
-    <div class="hero-sub">Debut EP · Summer 2026</div>
-    <div class="hero-divider"></div>
-  </div>
-  <div class="hero-bottom">
-    <div class="hero-bottom-left">
-      Home Demos · Out Now<br>
-      SoundCloud · tenderanomalies.com
+<!-- ── ABOUT ─────────────────────────────────── -->
+<section class="about-section nav-below-fixed" id="about">
+  <div class="about-left">
+    <div class="about-quote">
+      The sound underneath the words — <em>recorded in the space between.</em>
     </div>
-    <div class="hero-ep-badge">
-      <div class="ep-label">Forthcoming</div>
-      <div class="ep-title">Debut EP</div>
-      <div class="ep-date">Summer 2026</div>
+    <div class="about-body">
+      <p>Tender Anomalies is the solo music project of Sushant Shrestha. The project began as a place to hold what the poems couldn't.</p>
+      <p>The songs move between trip-hop and folk, between the intimate and the cosmic. Sparse. Unhurried. Honest.</p>
+      <p>The debut EP arrives Summer 2026. The home demos are where it started.</p>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-fact">
+      <div class="fact-label">Artist</div>
+      <div class="fact-value">Sushant Shrestha</div>
+    </div>
+    <div class="about-fact">
+      <div class="fact-label">Sound</div>
+      <div class="fact-value">Trip-hop · Indie Folk</div>
+    </div>
+    <div class="about-fact">
+      <div class="fact-label">Poetry</div>
+      <div class="fact-value">ryusho.arts</div>
+    </div>
+    <div class="about-fact">
+      <div class="fact-label">EP Release</div>
+      <div class="fact-value">Summer 2026</div>
     </div>
   </div>
 </section>
-
-<!-- ── MARQUEE ──────────────────────────────── -->
-<div class="marquee-wrap">
-  <div class="marquee" id="marquee"></div>
-</div>
-
-<!-- ── COUNTDOWN ─────────────────────────────── -->
-<section class="countdown-section" id="countdown">
-  <div class="countdown-mark">TA</div>
-  <div class="countdown-eyebrow">The EP Drops In</div>
-  <div class="countdown-title">
-    Songs about belonging<br>and becoming.
-  </div>
-  <div class="countdown-nums">
-    <div class="cd-block"><span class="cd-num" id="cd-d">--</span><div class="cd-unit">Days</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-h">--</span><div class="cd-unit">Hours</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-m">--</span><div class="cd-unit">Minutes</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-s">--</span><div class="cd-unit">Seconds</div></div>
-  </div>
-  <div class="countdown-form">
-    <input type="email" placeholder="your@email.com — get notified at release" />
-    <button>Notify me</button>
-  </div>
-</section>
-
-<script>
-// MARQUEE
-const marqueeItems = [
-  'Songs about belonging and becoming',
-  'Debut EP · Summer 2026',
-  'Home Demos out now',
-  'Trip-hop · Indie Folk',
-  'ryusho.arts · Poetry',
-  'Sushant Shrestha',
-  'Tender Anomalies',
-];
-const m = document.getElementById('marquee');
-const doubled = [...marqueeItems, ...marqueeItems];
-m.innerHTML = doubled.map(t =>
-  `<div class="marquee-item"><span class="marquee-dot"></span>${t}</div>`
-).join('');
-
-// COUNTDOWN
-const target = new Date('2026-07-21T00:00:00');
-function tick() {
-  const diff = target - new Date();
-  if (diff <= 0) return;
-  const pad = n => String(n).padStart(2,'0');
-  document.getElementById('cd-d').textContent = pad(Math.floor(diff/864e5));
-  document.getElementById('cd-h').textContent = pad(Math.floor(diff%864e5/36e5));
-  document.getElementById('cd-m').textContent = pad(Math.floor(diff%36e5/6e4));
-  document.getElementById('cd-s').textContent = pad(Math.floor(diff%6e4/1e3));
-}
-tick(); setInterval(tick,1000);
-</script>
 </body>
 </html>
