@@ -346,6 +346,37 @@
     margin-bottom: 4rem;
   }
 
+  .tracklist {
+    display: flex;
+    flex-direction: column;
+    border-top: 0.5px solid var(--gray2);
+    margin-bottom: 4rem;
+  }
+
+  .track-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 0.5px solid var(--gray2);
+  }
+
+  .track-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gray4);
+    min-width: 20px;
+  }
+
+  .track-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--black);
+  }
+
   .credits-block {
     margin-top: 4rem;
     padding-top: 2.5rem;
@@ -929,7 +960,24 @@
   <div class="section-num">01 · Music</div>
   <div class="section-title">The EP</div>
   <p class="ep-intro">Debut EP · Summer 2026</p>
-  <p class="ep-tracklist-note">Full track listing coming soon.</p>
+  <div class="tracklist">
+    <div class="track-row">
+      <div class="track-num">01</div>
+      <div class="track-title">Combination</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">02</div>
+      <div class="track-title">Enchanted Eyes</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">03</div>
+      <div class="track-title">Coffee Cups, Beer Mugs</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">04</div>
+      <div class="track-title">Across the Room</div>
+    </div>
+  </div>
   <div class="credits-block">
     <div class="credits-title">Production Credits</div>
     <div class="credits-grid">
