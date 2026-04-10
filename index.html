@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tender Anomalies</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;700;900&family=IM+Fell+English:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f5f0;
+    --gray1: #1a1a1a;
+    --gray2: #2e2e2e;
+    --gray3: #555;
+    --gray4: #888;
+    --gray5: #bbb;
+    --gray6: #ddd;
+    --cream: #f5f5f0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Special Elite', monospace;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ── GRAIN OVERLAY ───────────────────────── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* ── PAGE SECTIONS ───────────────────────── */
+  .page { min-height: 100vh; position: relative; }
+
+  /* ── OPENING / HERO ──────────────────────── */
+  .hero {
+    background: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Big circle - like a vinyl record or album art */
+  .hero-circle {
+    position: absolute;
+    width: 70vmin; height: 70vmin;
+    border: 0.5px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slowspin 60s linear infinite;
+  }
+  .hero-circle::before {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border: 0.5px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .hero-circle::after {
+    content: '';
+    position: absolute;
+    inset: 30%;
+    border: 0.5px solid rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .hero-dot {
+    position: absolute;
+    width: 8px; height: 8px;
+    background: var(--white);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes slowspin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  .hero-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2.5rem;
+    position: relative; z-index: 10;
+    border-bottom: 0.5px solid rgba(255,255,255,0.1);
+  }
+  .hero-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .hero-nav-links {
+    display: flex; gap: 2rem;
+  }
+  .hero-nav-links a {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .hero-nav-links a:hover { color: var(--white); }
+
+  .hero-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  .hero-issue {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-family: 'IM Fell English', serif;
+    font-size: clamp(56px, 10vw, 110px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title span {
+    display: block;
+    font-style: normal;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.28em;
+    letter-spacing: 0.4em;
+    font-weight: 200;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.5rem;
+  }
+  .hero-sub {
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 2rem;
+  }
+  .hero-divider {
+    width: 1px; height: 60px;
+    background: rgba(255,255,255,0.2);
+    margin: 2rem auto 0;
+  }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2rem 2.5rem;
+    position: relative; z-index: 10;
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .hero-bottom-left {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+  .hero-ep-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .ep-label {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+  }
+  .ep-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+  }
+  .ep-date {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ── DEMOS SECTION ───────────────────────── */
+  .demos-section {
+    background: var(--white);
+    padding: 6rem 2.5rem;
+    border-bottom: 1px solid var(--black);
+  }
+  .section-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gray4);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+  .demos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--black);
+  }
+  .demo-track {
+    padding: 2rem;
+    border-right: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .demo-track:nth-child(even) { border-right: none; }
+  .demo-track:nth-child(n+3) { border-bottom: none; }
+  .demo-track:hover { background: var(--black); color: var(--white); }
+  .demo-track:hover .demo-num { color: rgba(255,255,255,0.2); }
+  .demo-track:hover .demo-name { color: var(--white); }
+  .demo-track:hover .demo-dur { color: rgba(255,255,255,0.4); }
+  .demo-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    color: rgba(0,0,0,0.06);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    transition: color 0.15s;
+  }
+  .demo-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--black);
+    margin-bottom: 0.25rem;
+    transition: color 0.15s;
+  }
+  .demo-desc {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--gray4);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    transition: color 0.15s;
+  }
+  .demo-track:hover .demo-desc { color: rgba(255,255,255,0.35); }
+  .demo-dur {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gray4);
+    transition: color 0.15s;
+  }
+  .demo-play {
+    position: absolute;
+    bottom: 2rem; right: 2rem;
+    width: 36px; height: 36px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .demo-track:hover .demo-play { opacity: 1; }
+  .demos-soundcloud {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .sc-line { flex: 1; height: 0.5px; background: var(--black); }
+  .sc-link {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--black);
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ── ABOUT SECTION ───────────────────────── */
+  .about-section {
+    background: var(--black);
+    color: var(--white);
+    padding: 7rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    border-bottom: 1px solid #222;
+  }
+  .about-left {}
+  .about-quote {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+  .about-quote em {
+    font-style: normal;
+    opacity: 0.3;
+  }
+  .about-body {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em;
+  }
+  .about-body p + p { margin-top: 1rem; }
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+  .about-fact {
+    padding: 1.5rem;
+    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .about-fact:last-child { border-bottom: none; }
+  .fact-label {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .fact-value {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── STORE ───────────────────────────────── */
+  .store-section {
+    background: var(--white);
+    padding: 6rem 2.5rem;
+    border-bottom: 1px solid var(--black);
+  }
+  .store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+  .store-note {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--gray4);
+    text-align: right;
+    line-height: 1.7;
+  }
+  .store-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--black);
+  }
+  .store-item {
+    border-right: 1px solid var(--black);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .store-item:last-child { border-right: none; }
+  .store-item:hover { background: var(--black); color: var(--white); }
+  .store-img {
+    aspect-ratio: 1;
+    border-bottom: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 64px;
+    color: rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .store-item:hover .store-img {
+    border-bottom-color: #333;
+    color: rgba(255,255,255,0.05);
+  }
+  /* halftone dots pattern in image */
+  .store-img::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 12px 12px;
+  }
+  .store-item:hover .store-img::before {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  }
+  .store-item-info { padding: 1.25rem; }
+  .store-item-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 0.25rem;
+    transition: color 0.15s;
+  }
+  .store-item-sub {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--gray4);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    transition: color 0.15s;
+  }
+  .store-item:hover .store-item-sub { color: rgba(255,255,255,0.3); }
+  .store-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .store-price {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    transition: color 0.15s;
+  }
+  .store-status {
+    font-family: 'Special Elite', monospace;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    color: var(--gray4);
+    text-transform: uppercase;
+    transition: color 0.15s;
+  }
+  .store-item:hover .store-status { color: rgba(255,255,255,0.3); }
+
+  /* ── RELEASE COUNTDOWN ───────────────────── */
+  .countdown-section {
+    background: var(--black);
+    color: var(--white);
+    padding: 6rem 2.5rem;
+    text-align: center;
+    border-bottom: 0.5px solid #111;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Big "TA" typographic mark */
+  .countdown-mark {
+    position: absolute;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 35vw;
+    color: rgba(255,255,255,0.02);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.08em;
+  }
+  .countdown-eyebrow {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .countdown-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(32px, 5vw, 56px);
+    color: var(--white);
+    margin-bottom: 4rem;
+    line-height: 1.1;
+    position: relative;
+  }
+  .countdown-nums {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+  .cd-block {
+    padding: 2rem 2.5rem;
+    border: 0.5px solid rgba(255,255,255,0.08);
+    border-right: none;
+    min-width: 120px;
+  }
+  .cd-block:last-child { border-right: 0.5px solid rgba(255,255,255,0.08); }
+  .cd-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    color: var(--white);
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .cd-unit {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+  }
+  .countdown-form {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 420px;
+    margin: 0 auto;
+    border: 0.5px solid rgba(255,255,255,0.15);
+    position: relative;
+  }
+  .countdown-form input {
+    flex: 1;
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 1rem 1.25rem;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    outline: none;
+  }
+  .countdown-form input::placeholder { color: rgba(255,255,255,0.2); }
+  .countdown-form button {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    padding: 1rem 1.5rem;
+    background: var(--white);
+    color: var(--black);
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-left: 0.5px solid rgba(255,255,255,0.15);
+    transition: background 0.15s, color 0.15s;
+  }
+  .countdown-form button:hover { background: rgba(255,255,255,0.85); }
+
+  /* ── PHOTOS SECTION ──────────────────────── */
+  .photos-section {
+    background: var(--white);
+    padding: 6rem 2.5rem;
+    border-bottom: 1px solid var(--black);
+  }
+  .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 0;
+    border: 1px solid var(--black);
+    margin-top: 3rem;
+  }
+  .photo-cell {
+    border-right: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .photo-cell:last-child, .photo-cell:nth-child(4n) { border-right: none; }
+  .photo-cell:nth-child(n+5) { border-bottom: none; }
+  .photo-cell.wide { grid-column: span 2; }
+  .photo-cell.tall { grid-row: span 2; }
+  .photo-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--gray6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .photo-cell.wide .photo-placeholder { aspect-ratio: 2; }
+  .photo-cell.tall .photo-placeholder { aspect-ratio: 0.5; }
+  .photo-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
+    background-size: 10px 10px;
+    opacity: 0.5;
+  }
+  .photo-cell:hover .photo-placeholder { background: var(--black); }
+  .photo-cell:hover .photo-placeholder::before {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  }
+  .photo-glyph {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 36px;
+    color: rgba(0,0,0,0.08);
+    position: relative;
+    transition: color 0.2s;
+  }
+  .photo-cell:hover .photo-glyph { color: rgba(255,255,255,0.06); }
+  .photo-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: rgba(0,0,0,0.2);
+    position: relative;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .photo-cell:hover .photo-label { color: rgba(255,255,255,0.15); }
+  .photo-caption {
+    padding: 0.875rem 1rem;
+    border-top: 0.5px solid var(--black);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .photo-cell:hover .photo-caption { background: var(--black); border-top-color: #222; }
+  .photo-cap-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--black);
+    transition: color 0.2s;
+  }
+  .photo-cell:hover .photo-cap-title { color: var(--white); }
+  .photo-cap-sub {
+    font-family: 'Special Elite', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--gray4);
+    margin-top: 2px;
+    transition: color 0.2s;
+  }
+  .photo-cell:hover .photo-cap-sub { color: rgba(255,255,255,0.25); }
+
+  /* ── CONNECT / FOOTER ────────────────────── */
+  .connect-section {
+    background: var(--black);
+    color: var(--white);
+    padding: 6rem 2.5rem 4rem;
+  }
+  .connect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-bottom: 5rem;
+  }
+  .connect-left {}
+  .connect-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .connect-body {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.06em;
+  }
+  .connect-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+  .connect-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 0.5px solid rgba(255,255,255,0.07);
+    text-decoration: none;
+    color: rgba(255,255,255,0.55);
+    transition: background 0.15s, color 0.15s;
+    cursor: pointer;
+  }
+  .connect-link:last-child { border-bottom: none; }
+  .connect-link:hover { background: rgba(255,255,255,0.04); color: var(--white); }
+  .cl-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 16px;
+  }
+  .cl-arrow {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    opacity: 0.3;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 2rem;
+    border-top: 0.5px solid rgba(255,255,255,0.06);
+  }
+  .footer-copy {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.15);
+    line-height: 1.8;
+    text-transform: uppercase;
+  }
+  .footer-logo {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: rgba(255,255,255,0.08);
+    letter-spacing: -0.02em;
+  }
+
+  /* ── HORIZONTAL RULE ─────────────────────── */
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 4rem 0;
+  }
+  .rule-line { flex: 1; height: 0.5px; background: rgba(255,255,255,0.08); }
+  .rule-text {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 7px;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.12);
+    text-transform: uppercase;
+  }
+
+  /* ── HORIZONTAL MARQUEE ──────────────────── */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 0.5px solid var(--black);
+    border-bottom: 0.5px solid var(--black);
+    padding: 0;
+    background: var(--white);
+  }
+  .marquee {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 25s linear infinite;
+    width: max-content;
+  }
+  @keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .marquee-item {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--black);
+    padding: 0.7rem 2rem;
+    border-right: 0.5px solid var(--gray6);
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .marquee-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--black);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 700px) {
+    .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .demos-grid, .store-grid { grid-template-columns: 1fr; }
+    .store-item { border-right: none; border-bottom: 1px solid var(--black); }
+    .store-item:last-child { border-bottom: none; }
+    .photos-grid { grid-template-columns: 1fr 1fr; }
+    .photo-cell.wide { grid-column: span 2; }
+    .cd-block { min-width: 70px; padding: 1.25rem; }
+    .cd-num { font-size: 36px; }
+    .hero-title { font-size: 52px; }
+    .store-grid { border: none; }
+    .store-item { border: 1px solid var(--black); margin-bottom: -1px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-circle"><div class="hero-dot"></div></div>
+  <nav class="hero-nav">
+    <div class="hero-logo">Tender Anomalies</div>
+    <div class="hero-nav-links">
+      <a href="#demos">Music</a>
+      <a href="#store">Store</a>
+      <a href="#photos">Photos</a>
+      <a href="#connect">Connect</a>
+    </div>
+  </nav>
+  <div class="hero-center">
+    <div class="hero-issue">Bellevue, WA · Est. 2025</div>
+    <h1 class="hero-title">
+      <span>Songs about</span>
+      Belonging<br>&amp; Becoming
+    </h1>
+    <div class="hero-sub">Debut EP · Summer 2026</div>
+    <div class="hero-divider"></div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-bottom-left">
+      Home Demos · Out Now<br>
+      SoundCloud · tenderanomalies.com
+    </div>
+    <div class="hero-ep-badge">
+      <div class="ep-label">Forthcoming</div>
+      <div class="ep-title">Debut EP</div>
+      <div class="ep-date">Summer 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ──────────────────────────────── -->
+<div class="marquee-wrap">
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<!-- ── DEMOS ────────────────────────────────── -->
+<section class="demos-section" id="demos">
+  <div class="section-num">01 · Music</div>
+  <div class="section-title">Home<br>Demos</div>
+  <div class="demos-grid" id="demos-grid"></div>
+  <div class="demos-soundcloud">
+    <div class="sc-line"></div>
+    <a class="sc-link" href="https://soundcloud.com/tender-anomalies">Listen on SoundCloud →</a>
+    <div class="sc-line"></div>
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────── -->
+<section class="about-section" id="about">
+  <div class="about-left">
+    <div class="about-quote">
+      The sound underneath the words — <em>recorded in the space between.</em>
+    </div>
+    <div class="about-body">
+      <p>Tender Anomalies is the solo music project of Sushant Shrestha — recorded in Bellevue, WA. The project began as a place to hold what the poems couldn't.</p>
+      <p>The songs move between trip-hop and folk, between the intimate and the cosmic. Sparse. Unhurried. Honest.</p>
+      <p>The debut EP arrives Summer 2026. The home demos are where it started.</p>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-fact">
+      <div class="fact-label">Artist</div>
+      <div class="fact-value">Sushant Shrestha</div>
+    </div>
+    <div class="about-fact">
+      <div class="fact-label">Location</div>
+      <div class="fact-value">Bellevue, Washington</div>
+    </div>
+    <div class="about-fact">
+      <div class="fact-label">Sound</div>
+      <div class="fact-value">Trip-hop · Indie Folk</div>
+    </div>
+    <div class="about-fact">
+      <div class="fact-label">Poetry</div>
+      <div class="fact-value">ryusho.arts</div>
+    </div>
+    <div class="about-fact">
+      <div class="fact-label">EP Release</div>
+      <div class="fact-value">Summer 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STORE ─────────────────────────────────── -->
+<section class="store-section" id="store">
+  <div class="store-header">
+    <div>
+      <div class="section-num">02 · Store</div>
+      <div class="section-title">The<br>Merch Drop</div>
+    </div>
+    <div class="store-note">
+      Print on demand · Ships worldwide<br>
+      Launching with the EP · Summer 2026<br>
+      Powered by Printful + Shopify
+    </div>
+  </div>
+  <div class="store-grid" id="store-grid"></div>
+</section>
+
+<!-- ── COUNTDOWN ─────────────────────────────── -->
+<section class="countdown-section" id="countdown">
+  <div class="countdown-mark">TA</div>
+  <div class="countdown-eyebrow">The EP Drops In</div>
+  <div class="countdown-title">
+    Songs about belonging<br>and becoming.
+  </div>
+  <div class="countdown-nums">
+    <div class="cd-block"><span class="cd-num" id="cd-d">--</span><div class="cd-unit">Days</div></div>
+    <div class="cd-block"><span class="cd-num" id="cd-h">--</span><div class="cd-unit">Hours</div></div>
+    <div class="cd-block"><span class="cd-num" id="cd-m">--</span><div class="cd-unit">Minutes</div></div>
+    <div class="cd-block"><span class="cd-num" id="cd-s">--</span><div class="cd-unit">Seconds</div></div>
+  </div>
+  <div class="countdown-form">
+    <input type="email" placeholder="your@email.com — get notified at release" />
+    <button>Notify me</button>
+  </div>
+</section>
+
+<!-- ── PHOTOS ─────────────────────────────────── -->
+<section class="photos-section" id="photos">
+  <div class="section-num">03 · Photos</div>
+  <div class="section-title">Portraits<br>& Stills</div>
+  <div class="photos-grid" id="photos-grid"></div>
+</section>
+
+<!-- ── CONNECT ────────────────────────────────── -->
+<section class="connect-section" id="connect">
+  <div class="connect-grid">
+    <div class="connect-left">
+      <div class="section-num" style="color:rgba(255,255,255,0.2);">04 · Connect</div>
+      <div class="connect-title">
+        Stay in<br>the world.
+      </div>
+      <div class="connect-body">
+        Follow along as the EP takes shape. Demos, process notes, and occasional dispatches — shared before the release, not after.
+      </div>
+    </div>
+    <div>
+      <div class="connect-links">
+        <a class="connect-link" href="https://soundcloud.com/tender-anomalies">
+          <span class="cl-name">SoundCloud · Home Demos</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="connect-link" href="https://www.youtube.com/@tenderanomalies">
+          <span class="cl-name">YouTube</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="connect-link" href="https://ryusho.arts">
+          <span class="cl-name">Poetry · ryusho.arts</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="connect-link" href="https://sushantshrestha.com">
+          <span class="cl-name">sushantshrestha.com</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="connect-link" href="mailto:hello@tenderanomalies.com">
+          <span class="cl-name">Press & Booking</span>
+          <span class="cl-arrow">→</span>
+        </a>
+      </div>
+      <div class="rule">
+        <div class="rule-line"></div>
+        <div class="rule-text">End of transmission</div>
+        <div class="rule-line"></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">
+      © 2026 Tender Anomalies Music<br>
+      Sushant Shrestha · Bellevue, WA<br>
+      tenderanomalies.com
+    </div>
+    <div class="footer-logo">Tender Anomalies</div>
+  </div>
+</section>
+
+<script>
+// MARQUEE
+const marqueeItems = [
+  'Songs about belonging and becoming',
+  'Debut EP · Summer 2026',
+  'Home Demos out now',
+  'Bellevue, WA',
+  'Trip-hop · Indie Folk',
+  'ryusho.arts · Poetry',
+  'Sushant Shrestha',
+  'Tender Anomalies',
+];
+const m = document.getElementById('marquee');
+const doubled = [...marqueeItems, ...marqueeItems];
+m.innerHTML = doubled.map(t =>
+  `<div class="marquee-item"><span class="marquee-dot"></span>${t}</div>`
+).join('');
+
+// DEMOS
+const demos = [
+  {n:'01', title:'Becoming', desc:'The first one. Recorded at 5am before anything else started.', dur:'3:42'},
+  {n:'02', title:'Threshold', desc:'Standing in a doorway. The moment before movement.', dur:'4:18'},
+  {n:'03', title:'Not Here Anymore', desc:'Where do you go when you leave yourself?', dur:'3:56'},
+  {n:'04', title:'Belonging', desc:'The one that started everything. Still unfinished.', dur:'5:11'},
+];
+document.getElementById('demos-grid').innerHTML = demos.map(d => `
+  <div class="demo-track">
+    <div class="demo-num">${d.n}</div>
+    <div class="demo-name">${d.title}</div>
+    <div class="demo-desc">${d.desc}</div>
+    <div class="demo-dur">${d.dur} · Home Demo · 2025</div>
+    <div class="demo-play">▶</div>
+  </div>`).join('');
+
+// STORE
+const items = [
+  {glyph:'TA', name:'Wordmark Tee', sub:'100% organic cotton · Unisex · Screen printed', price:'$32', status:'At Launch'},
+  {glyph:'◎', name:'EP Hoodie', sub:'Heavyweight fleece · Album artwork · Front pocket', price:'$58', status:'At Launch'},
+  {glyph:'∿', name:'Lyric Tote', sub:'Natural canvas · A line from the EP · 15L', price:'$24', status:'At Launch'},
+  {glyph:'→', name:'Sticker Pack', sub:'5 vinyl stickers · Weatherproof · Lyrics + glyphs', price:'$12', status:'At Launch'},
+  {glyph:'I', name:'Art Print', sub:'12×16in · Archival matte · Signed · Limited 50', price:'$38', status:'Limited Ed.'},
+  {glyph:'♪', name:'Digital EP', sub:'High-quality download · All tracks · Liner notes PDF', price:'$8', status:'Pre-Save'},
+];
+document.getElementById('store-grid').innerHTML = items.map(i => `
+  <div class="store-item">
+    <div class="store-img">${i.glyph}</div>
+    <div class="store-item-info">
+      <div class="store-item-name">${i.name}</div>
+      <div class="store-item-sub">${i.sub}</div>
+      <div class="store-item-footer">
+        <div class="store-price">${i.price}</div>
+        <div class="store-status">${i.status}</div>
+      </div>
+    </div>
+  </div>`).join('');
+
+// PHOTOS
+const photos = [
+  {glyph:'I',  title:'The First Quiet',    sub:'Becoming · 01', cls:''},
+  {glyph:'→',  title:'At the Window',      sub:'Threshold · 02', cls:'tall'},
+  {glyph:'◌',  title:'The Instrument',     sub:'Still · 03', cls:''},
+  {glyph:'◎',  title:'Between Rooms',      sub:'Threshold · 04', cls:''},
+  {glyph:'◐',  title:'Shadow Self',        sub:'Becoming · 05', cls:'wide'},
+  {glyph:'≡',  title:'The Books',          sub:'Still · 09', cls:''},
+  {glyph:'↑',  title:'Looking Up',         sub:'Becoming · 07', cls:''},
+];
+document.getElementById('photos-grid').innerHTML = photos.map(p => `
+  <div class="photo-cell ${p.cls}">
+    <div class="photo-placeholder">
+      <div class="photo-glyph">${p.glyph}</div>
+      <div class="photo-label">Photograph</div>
+    </div>
+    <div class="photo-caption">
+      <div class="photo-cap-title">${p.title}</div>
+      <div class="photo-cap-sub">${p.sub}</div>
+    </div>
+  </div>`).join('');
+
+// COUNTDOWN
+const target = new Date('2026-07-21T00:00:00');
+function tick() {
+  const diff = target - new Date();
+  if (diff <= 0) return;
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('cd-d').textContent = pad(Math.floor(diff/864e5));
+  document.getElementById('cd-h').textContent = pad(Math.floor(diff%864e5/36e5));
+  document.getElementById('cd-m').textContent = pad(Math.floor(diff%36e5/6e4));
+  document.getElementById('cd-s').textContent = pad(Math.floor(diff%6e4/1e3));
+}
+tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
