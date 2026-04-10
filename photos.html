@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -30,7 +30,7 @@
     cursor: crosshair;
   }
 
-  /* ── GRAIN OVERLAY ───────────────────────── */
+  /*  GRAIN OVERLAY  */
   body::before {
     content: '';
     position: fixed; inset: 0; z-index: 999;
@@ -39,10 +39,10 @@
     opacity: 0.6;
   }
 
-  /* ── PAGE SECTIONS ───────────────────────── */
+  /*  PAGE SECTIONS  */
   .page { min-height: 100vh; position: relative; }
 
-  /* ── OPENING / HERO ──────────────────────── */
+  /*  OPENING / HERO  */
   .hero {
     background: var(--black);
     color: var(--white);
@@ -127,6 +127,46 @@
     transition: color 0.2s;
   }
   .hero-nav-links a:hover { color: var(--white); }
+
+
+  .nav-divider {
+    display: inline-block;
+    width: 0.5px;
+    height: 10px;
+    background: rgba(255,255,255,0.15);
+    margin: 0 0.6rem;
+    vertical-align: middle;
+  }
+
+  .nav-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.35);
+    transition: color 0.2s;
+    padding: 0 0.15rem;
+  }
+
+  .nav-social svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .nav-social:hover {
+    color: rgba(255,255,255,0.9);
+  }
+
+  .hero-nav .nav-divider {
+    background: rgba(0,0,0,0.15);
+  }
+
+  .hero-nav .nav-social {
+    color: rgba(0,0,0,0.3);
+  }
+
+  .hero-nav .nav-social:hover {
+    color: rgba(0,0,0,0.8);
+  }
 
   .hero-center {
     display: flex;
@@ -221,7 +261,7 @@
     color: rgba(255,255,255,0.2);
   }
 
-  /* ── DEMOS SECTION ───────────────────────── */
+  /*  DEMOS SECTION  */
   .demos-section {
     background: var(--white);
     padding: 6rem 2.5rem;
@@ -328,7 +368,7 @@
     white-space: nowrap;
   }
 
-  /* ── ABOUT SECTION ───────────────────────── */
+  /*  ABOUT SECTION  */
   .about-section {
     background: var(--black);
     color: var(--white);
@@ -388,7 +428,7 @@
     color: rgba(255,255,255,0.75);
   }
 
-  /* ── STORE ───────────────────────────────── */
+  /*  STORE  */
   .store-section {
     background: var(--white);
     padding: 6rem 2.5rem;
@@ -492,7 +532,7 @@
   }
   .store-item:hover .store-status { color: rgba(255,255,255,0.3); }
 
-  /* ── RELEASE COUNTDOWN ───────────────────── */
+  /*  RELEASE COUNTDOWN  */
   .countdown-section {
     background: var(--black);
     color: var(--white);
@@ -602,7 +642,7 @@
   }
   .countdown-form button:hover { background: rgba(255,255,255,0.85); }
 
-  /* ── PHOTOS SECTION ──────────────────────── */
+  /*  PHOTOS SECTION  */
   .photos-section {
     background: var(--white);
     padding: 6rem 2.5rem;
@@ -634,6 +674,18 @@
 
   .photo-cell:hover img {
     transform: scale(1.03);
+  }
+
+  .photo-cell img {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+  }
+
+  .photo-cell {
+    -webkit-user-select: none;
+    user-select: none;
   }
   .photo-placeholder {
     width: 100%;
@@ -702,7 +754,7 @@
   }
   .photo-cell:hover .photo-cap-sub { color: rgba(255,255,255,0.25); }
 
-  /* ── CONNECT / FOOTER ────────────────────── */
+  /*  CONNECT / FOOTER  */
   .connect-section {
     background: var(--black);
     color: var(--white);
@@ -786,7 +838,7 @@
     letter-spacing: -0.02em;
   }
 
-  /* ── HORIZONTAL RULE ─────────────────────── */
+  /*  HORIZONTAL RULE  */
   .rule {
     display: flex;
     align-items: center;
@@ -803,7 +855,7 @@
     text-transform: uppercase;
   }
 
-  /* ── HORIZONTAL MARQUEE ──────────────────── */
+  /*  HORIZONTAL MARQUEE  */
   .marquee-wrap {
     overflow: hidden;
     border-top: 0.5px solid var(--black);
@@ -836,7 +888,33 @@
     background: var(--black);
     flex-shrink: 0;
   }
+  .site-footer {
+    padding: 2rem 2.5rem;
+    border-top: 0.5px solid var(--gray2);
+    background: var(--white);
+  }
 
+  .site-footer .footer-copy {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--gray4);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .site-footer .footer-copy a {
+    color: var(--gray4);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--gray4);
+    padding-bottom: 1px;
+    transition: color 0.2s;
+  }
+
+  .site-footer .footer-copy a:hover {
+    color: var(--black);
+    border-color: var(--black);
+  }
   @media (max-width: 700px) {
     .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
     .demos-grid, .store-grid { grid-template-columns: 1fr; }
@@ -860,13 +938,46 @@
     <a href="music.html">Music</a>
     <a href="demos.html">Demos</a>
     <a href="about.html">About</a>
-    <a href="store.html">Store</a>
+
     <a href="photos.html">Photos</a>
     <a href="connect.html">Connect</a>
+    <span class="nav-divider"></span>
+
+    <a class="nav-social" href="https://www.instagram.com/tenderanomalies/" target="_blank" rel="noopener" title="Instagram">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+
+    <a class="nav-social" href="https://soundcloud.com/tender-anomalies" target="_blank" rel="noopener" title="SoundCloud">
+      <svg width="15" height="13" viewBox="0 0 24 18" fill="currentColor">
+        <path d="M0 11.5C0 13.4 1.6 15 3.5 15H17c2.2 0 4-1.8 4-4 0-1.9-1.3-3.5-3.1-3.9C17.6 3.8 15.5 2 13 2c-1.7 0-3.2.8-4.2 2C8.2 3.7 7.6 3.5 7 3.5 5.1 3.5 3.5 5 3.4 6.9 1.5 7.4 0 9.3 0 11.5z"/>
+      </svg>
+    </a>
+
+    <a class="nav-social" href="https://www.youtube.com/@tenderanomalies" target="_blank" rel="noopener" title="YouTube">
+      <svg width="15" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 2.8 12 2.8 12 2.8s-4.2 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.8 9.2.8 11.5v2.1c0 2.3.2 4.5.2 4.5s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.5 22.2 12 22.2 12 22.2s4.2 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.2-2.2.2-4.5v-2.1C23.2 9.2 23 7 23 7zM9.7 15.5V8.4l8.1 3.6-8.1 3.5z"/>
+      </svg>
+    </a>
+
+    <a class="nav-social" href="https://linktr.ee/tenderanomalies" target="_blank" rel="noopener" title="Linktree">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13.5 5.5l4-4.5h-3.5V0h-4v1L13.5 5.5zM10.5 5.5l-4-4.5H10V0h4v1L10.5 5.5zM10 6h4v10h-4zM7 13h10v2H7zM8.5 17h7v2h-7zM9.5 21h5v3h-5z"/>
+      </svg>
+    </a>
+
+    <a class="nav-social" href="https://www.tiktok.com/@tenderanomalies" target="_blank" rel="noopener" title="TikTok">
+      <svg width="12" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.6 3.3C18.5 2 17.9.6 17.8 0h-3.6v16.4c0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-1.7 1.4-3.1 3.1-3.1.3 0 .6 0 .9.1V9.7c-.3 0-.6-.1-.9-.1C6.8 9.6 3.6 12.8 3.6 16.7c0 3.9 3.2 7.1 7.1 7.1 3.9 0 7.1-3.2 7.1-7.1V8.2c1.4 1 3 1.6 4.8 1.6V6.2c-1.1 0-2.2-.4-3-1z"/>
+      </svg>
+    </a>
   </div>
 </nav>
 
-<!-- ── PHOTOS ─────────────────────────────────── -->
+<!--  PHOTOS  -->
 <section class="photos-section nav-below-fixed" id="photos">
   <div class="section-num">03 · Photos</div>
   <div class="section-title">Portraits<br>& Stills</div>
@@ -874,7 +985,7 @@
 </section>
 
 <script>
-// PHOTOS — files from assets/photos/ (alphabetical)
+// PHOTOS  files from assets/photos/ (alphabetical)
 const photos = [
   { file: 'california.webp',  title: 'The First Quiet',    sub: 'Becoming · 01' },
   { file: 'college.webp',     title: 'At the Window',      sub: 'Threshold · 02' },
@@ -892,5 +1003,22 @@ document.getElementById('photos-grid').innerHTML = photos.map(p => `
     </div>
   </div>`).join('');
 </script>
+<footer class="site-footer">
+  <div class="footer-copy">
+    &copy; 2026 Tender Anomalies Music &nbsp;&middot;&nbsp; Pacific Northwest &amp; Bay Area &nbsp;&middot;&nbsp;
+    <a href="https://ryusho.art" target="_blank" rel="noopener">ryusho.art</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://www.sushantshrestha.com" target="_blank" rel="noopener">sushantshrestha.com</a>
+  </div>
+</footer>
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+  </script>
 </body>
 </html>
+
+
+
+
+
