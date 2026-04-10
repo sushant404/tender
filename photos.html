@@ -916,136 +916,43 @@
     border-color: var(--black);
   }
   body {
+    overflow-x: hidden;
+  }
+
+  .masonry-grid {
+    columns: 3;
+    column-gap: 6px;
+    padding: 6px;
+  }
+
+  .masonry-cell {
+    break-inside: avoid;
+    margin-bottom: 6px;
     overflow: hidden;
+    background: var(--gray2);
   }
 
-  .slideshow {
-    position: fixed;
-    inset: 0;
-    top: 60px;
-    background: var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .slides {
-    position: relative;
+  .masonry-cell img {
     width: 100%;
-    height: 100%;
-  }
-
-  .slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-    pointer-events: none;
-  }
-
-  .slide.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .slide img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
     height: auto;
-    object-fit: contain;
     display: block;
     user-select: none;
     -webkit-user-drag: none;
     pointer-events: none;
+    transition: transform 0.6s ease;
   }
 
-  .slide-caption {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+  .masonry-cell:hover img {
+    transform: scale(1.03);
   }
 
-  .slide-cap-title {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 14px;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.05em;
+  @media (max-width: 768px) {
+    .masonry-grid { columns: 2; }
   }
 
-  .slide-cap-sub {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.25);
-    text-transform: uppercase;
-    margin-top: 4px;
+  @media (max-width: 480px) {
+    .masonry-grid { columns: 1; }
   }
-
-  .slide-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.3);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 1rem;
-    transition: color 0.2s;
-    z-index: 10;
-    font-family: 'Special Elite', monospace;
-  }
-
-  .slide-btn:hover { color: rgba(255,255,255,0.9); }
-  .slide-prev { left: 2rem; }
-  .slide-next { right: 2rem; }
-
-  .slide-counter {
-    position: absolute;
-    top: 1.5rem;
-    left: 2.5rem;
-    z-index: 10;
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 200;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    color: rgba(255,255,255,0.25);
-    display: flex;
-    gap: 0.4rem;
-    align-items: center;
-  }
-
-  .slide-sep { color: rgba(255,255,255,0.1); }
-
-  .slide-dots {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 6px;
-    z-index: 10;
-  }
-
-  .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .dot.active { background: rgba(255,255,255,0.7); }
-
-  .site-footer { display: none; }
   @media (max-width: 700px) {
     .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
     .demos-grid, .store-grid { grid-template-columns: 1fr; }
@@ -1106,75 +1013,23 @@
   </div>
 </nav>
 
-  <div class="slideshow">
-    <div class="slide-counter">
-      <span id="slide-current">01</span>
-      <span class="slide-sep">/</span>
-      <span id="slide-total">05</span>
-    </div>
-
-    <div class="slides" id="slides"></div>
-
-    <button class="slide-btn slide-prev" id="prev" aria-label="Previous">
-      &#8592;
-    </button>
-    <button class="slide-btn slide-next" id="next" aria-label="Next">
-      &#8594;
-    </button>
-
-    <div class="slide-dots" id="dots"></div>
-  </div>
+  <div class="masonry-grid" id="masonry-grid"></div>
 
 <script>
   const photos = [
-    { src: 'assets/photos/california.webp', title: 'The First Quiet',  sub: 'Becoming · 01' },
-    { src: 'assets/photos/college.webp', title: 'At the Window',    sub: 'Threshold · 02' },
-    { src: 'assets/photos/fedora.webp', title: 'The Instrument',   sub: 'Still · 03' },
-    { src: 'assets/photos/recording.webp', title: 'Between Rooms',    sub: 'Threshold · 04' },
-    { src: 'assets/photos/suitguitar.webp', title: 'Shadow Self',      sub: 'Becoming · 05' },
+    'assets/photos/suitguitar.webp',
+    'assets/photos/california.webp',
+    'assets/photos/college.webp',
+    'assets/photos/fedora.webp',
+    'assets/photos/recording.webp',
   ];
 
-  const slidesEl = document.getElementById('slides');
-  const dotsEl = document.getElementById('dots');
-  const totalEl = document.getElementById('slide-total');
-  const currentEl = document.getElementById('slide-current');
-  let current = 0;
-
-  totalEl.textContent = String(photos.length).padStart(2, '0');
-
-  slidesEl.innerHTML = photos.map((p, i) => `
-    <div class="slide ${i === 0 ? 'active' : ''}">
-      <img src="${p.src}" alt="${p.title}" />
-      <div class="slide-caption">
-        <div class="slide-cap-title">${p.title}</div>
-        <div class="slide-cap-sub">${p.sub}</div>
+  document.getElementById('masonry-grid').innerHTML = photos
+    .map(src => `
+      <div class="masonry-cell">
+        <img src="${src}" alt="" />
       </div>
-    </div>
-  `).join('');
-
-  dotsEl.innerHTML = photos.map((_, i) => `
-    <div class="dot ${i === 0 ? 'active' : ''}" data-i="${i}"></div>
-  `).join('');
-
-  function goTo(n) {
-    document.querySelectorAll('.slide')[current].classList.remove('active');
-    document.querySelectorAll('.dot')[current].classList.remove('active');
-    current = (n + photos.length) % photos.length;
-    document.querySelectorAll('.slide')[current].classList.add('active');
-    document.querySelectorAll('.dot')[current].classList.add('active');
-    currentEl.textContent = String(current + 1).padStart(2, '0');
-  }
-
-  document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('next').addEventListener('click', () => goTo(current + 1));
-  dotsEl.addEventListener('click', e => {
-    if (e.target.dataset.i !== undefined) goTo(+e.target.dataset.i);
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') goTo(current + 1);
-    if (e.key === 'ArrowLeft') goTo(current - 1);
-  });
+    `).join('');
 
   document.addEventListener('contextmenu', e => e.preventDefault());
   document.addEventListener('dragstart', e => e.preventDefault());
