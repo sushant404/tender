@@ -328,6 +328,51 @@
     white-space: nowrap;
   }
 
+  .credits-block {
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 0.5px solid var(--gray2);
+  }
+
+  .credits-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gray4);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .credits-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .credits-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    border-bottom: 0.5px solid var(--gray2);
+    padding-bottom: 1.25rem;
+  }
+
+  .credits-role {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--gray4);
+    text-transform: uppercase;
+  }
+
+  .credits-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gray3);
+  }
+
   /* ── ABOUT SECTION ───────────────────────── */
   .about-section {
     background: var(--black);
@@ -869,6 +914,27 @@
     <div class="sc-line"></div>
     <a class="sc-link" href="https://soundcloud.com/tender-anomalies">Listen on SoundCloud →</a>
     <div class="sc-line"></div>
+  </div>
+  <div class="credits-block">
+    <div class="credits-title">Production Credits</div>
+    <div class="credits-grid">
+      <div class="credits-row">
+        <div class="credits-role">Songwriting · Vocals · Acoustic Guitar · Arrangement · Production</div>
+        <div class="credits-name">Sushant Shrestha</div>
+      </div>
+      <div class="credits-row">
+        <div class="credits-role">Electric Guitar</div>
+        <div class="credits-name">Han Jun Ryu · Chris Jacobson · Davy Bergier</div>
+      </div>
+      <div class="credits-row">
+        <div class="credits-role">Acoustic Drums</div>
+        <div class="credits-name">Bruno Werner</div>
+      </div>
+      <div class="credits-row">
+        <div class="credits-role">Synthesizer</div>
+        <div class="credits-name">Felipe Ribeiro</div>
+      </div>
+    </div>
   </div>
 </section>
 
