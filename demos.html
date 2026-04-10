@@ -324,6 +324,8 @@
     text-decoration: none;
     transition: background 0.2s, color 0.2s;
     flex-shrink: 0;
+    background: none;
+    cursor: pointer;
   }
 
   .demo-play-btn:hover {
@@ -1009,40 +1011,47 @@
 <section class="demos-section nav-below-fixed" id="demos">
   <div class="section-title">Home<br>Demos</div>
   <p class="demos-intro">Recorded alone. Where the songs began.</p>
-  <div class="demos-list">
+  <!-- Hidden SoundCloud iframes -->
+  <div style="display:none;">
+    <iframe id="sc-0" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/tender-anomalies/schuyler-demo-1&auto_play=false"></iframe>
+    <iframe id="sc-1" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/tender-anomalies/califonnia-heavy-instrumental&auto_play=false"></iframe>
+    <iframe id="sc-2" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/tender-anomalies/deep-forbidden-lake-alternate-version-demo-2&auto_play=false"></iframe>
+    <iframe id="sc-3" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/tender-anomalies/deep-forbidden-lake-demo-3&auto_play=false"></iframe>
+  </div>
 
+  <div class="demos-list">
     <div class="demo-track">
       <div class="demo-num">01</div>
-      <a class="demo-play-btn" href="https://soundcloud.com/tender-anomalies/schuyler-demo-1" target="_blank" rel="noopener">
+      <button class="demo-play-btn" data-index="0" aria-label="Play Schuyler">
         <span class="play-icon">▶</span>
-      </a>
+      </button>
       <div class="demo-name">Schuyler</div>
     </div>
-
     <div class="demo-track">
       <div class="demo-num">02</div>
-      <a class="demo-play-btn" href="https://soundcloud.com/tender-anomalies/califonnia-heavy-instrumental" target="_blank" rel="noopener">
+      <button class="demo-play-btn" data-index="1" aria-label="Play California Heavy">
         <span class="play-icon">▶</span>
-      </a>
+      </button>
       <div class="demo-name">California Heavy</div>
     </div>
-
     <div class="demo-track">
       <div class="demo-num">03</div>
-      <a class="demo-play-btn" href="https://soundcloud.com/tender-anomalies/deep-forbidden-lake-alternate-version-demo-2" target="_blank" rel="noopener">
+      <button class="demo-play-btn" data-index="2" aria-label="Play Deep Forbidden Lake Alternate">
         <span class="play-icon">▶</span>
-      </a>
+      </button>
       <div class="demo-name">Deep Forbidden Lake (Alternate Version)</div>
     </div>
-
     <div class="demo-track">
       <div class="demo-num">04</div>
-      <a class="demo-play-btn" href="https://soundcloud.com/tender-anomalies/deep-forbidden-lake-demo-3" target="_blank" rel="noopener">
+      <button class="demo-play-btn" data-index="3" aria-label="Play Deep Forbidden Lake">
         <span class="play-icon">▶</span>
-      </a>
+      </button>
       <div class="demo-name">Deep Forbidden Lake</div>
     </div>
-
   </div>
   <div class="demos-soundcloud">
     <div class="sc-line"></div>
@@ -1058,7 +1067,42 @@
     &nbsp;&middot;&nbsp;
     <a href="https://www.sushantshrestha.com" target="_blank" rel="noopener">sushantshrestha.com</a>
   </div>
-</footer></body>
+</footer>
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+    const widgets = [0,1,2,3].map(i => SC.Widget(document.getElementById('sc-' + i)));
+    const btns = document.querySelectorAll('.demo-play-btn');
+    let currentIndex = null;
+
+    widgets.forEach((widget, i) => {
+      widget.bind(SC.Widget.Events.FINISH, () => {
+        btns[i].querySelector('.play-icon').textContent = '▶';
+        currentIndex = null;
+      });
+    });
+
+    btns.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        if (currentIndex === i) {
+          // pause current
+          widgets[i].pause();
+          btn.querySelector('.play-icon').textContent = '▶';
+          currentIndex = null;
+        } else {
+          // stop previous
+          if (currentIndex !== null) {
+            widgets[currentIndex].pause();
+            btns[currentIndex].querySelector('.play-icon').textContent = '▶';
+          }
+          // play new
+          widgets[i].play();
+          btn.querySelector('.play-icon').textContent = '■';
+          currentIndex = i;
+        }
+      });
+    });
+  </script>
+</body>
 </html>
 
 
