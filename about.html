@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -30,7 +30,7 @@
     cursor: crosshair;
   }
 
-  /* ── GRAIN OVERLAY ───────────────────────── */
+  /*  GRAIN OVERLAY  */
   body::before {
     content: '';
     position: fixed; inset: 0; z-index: 999;
@@ -39,10 +39,10 @@
     opacity: 0.6;
   }
 
-  /* ── PAGE SECTIONS ───────────────────────── */
+  /*  PAGE SECTIONS  */
   .page { min-height: 100vh; position: relative; }
 
-  /* ── OPENING / HERO ──────────────────────── */
+  /*  OPENING / HERO  */
   .hero {
     background: var(--black);
     color: var(--white);
@@ -127,6 +127,46 @@
     transition: color 0.2s;
   }
   .hero-nav-links a:hover { color: var(--white); }
+
+
+  .nav-divider {
+    display: inline-block;
+    width: 0.5px;
+    height: 10px;
+    background: rgba(255,255,255,0.15);
+    margin: 0 0.6rem;
+    vertical-align: middle;
+  }
+
+  .nav-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.35);
+    transition: color 0.2s;
+    padding: 0 0.15rem;
+  }
+
+  .nav-social svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .nav-social:hover {
+    color: rgba(255,255,255,0.9);
+  }
+
+  .hero-nav .nav-divider {
+    background: rgba(0,0,0,0.15);
+  }
+
+  .hero-nav .nav-social {
+    color: rgba(0,0,0,0.3);
+  }
+
+  .hero-nav .nav-social:hover {
+    color: rgba(0,0,0,0.8);
+  }
 
   .hero-center {
     display: flex;
@@ -221,7 +261,7 @@
     color: rgba(255,255,255,0.2);
   }
 
-  /* ── DEMOS SECTION ───────────────────────── */
+  /*  DEMOS SECTION  */
   .demos-section {
     background: var(--white);
     padding: 6rem 2.5rem;
@@ -328,7 +368,7 @@
     white-space: nowrap;
   }
 
-  /* ── ABOUT SECTION ───────────────────────── */
+  /*  ABOUT SECTION  */
   .about-section {
     background: var(--black);
     color: var(--white);
@@ -388,7 +428,7 @@
     color: rgba(255,255,255,0.75);
   }
 
-  /* ── STORE ───────────────────────────────── */
+  /*  STORE  */
   .store-section {
     background: var(--white);
     padding: 6rem 2.5rem;
@@ -492,7 +532,7 @@
   }
   .store-item:hover .store-status { color: rgba(255,255,255,0.3); }
 
-  /* ── RELEASE COUNTDOWN ───────────────────── */
+  /*  RELEASE COUNTDOWN  */
   .countdown-section {
     background: var(--black);
     color: var(--white);
@@ -602,7 +642,7 @@
   }
   .countdown-form button:hover { background: rgba(255,255,255,0.85); }
 
-  /* ── PHOTOS SECTION ──────────────────────── */
+  /*  PHOTOS SECTION  */
   .photos-section {
     background: var(--white);
     padding: 6rem 2.5rem;
@@ -696,7 +736,7 @@
   }
   .photo-cell:hover .photo-cap-sub { color: rgba(255,255,255,0.25); }
 
-  /* ── CONNECT / FOOTER ────────────────────── */
+  /*  CONNECT / FOOTER  */
   .connect-section {
     background: var(--black);
     color: var(--white);
@@ -780,7 +820,7 @@
     letter-spacing: -0.02em;
   }
 
-  /* ── HORIZONTAL RULE ─────────────────────── */
+  /*  HORIZONTAL RULE  */
   .rule {
     display: flex;
     align-items: center;
@@ -797,7 +837,7 @@
     text-transform: uppercase;
   }
 
-  /* ── HORIZONTAL MARQUEE ──────────────────── */
+  /*  HORIZONTAL MARQUEE  */
   .marquee-wrap {
     overflow: hidden;
     border-top: 0.5px solid var(--black);
@@ -830,7 +870,33 @@
     background: var(--black);
     flex-shrink: 0;
   }
+  .site-footer {
+    padding: 2rem 2.5rem;
+    border-top: 0.5px solid var(--gray2);
+    background: var(--white);
+  }
 
+  .site-footer .footer-copy {
+    font-family: 'Special Elite', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--gray4);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .site-footer .footer-copy a {
+    color: var(--gray4);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--gray4);
+    padding-bottom: 1px;
+    transition: color 0.2s;
+  }
+
+  .site-footer .footer-copy a:hover {
+    color: var(--black);
+    border-color: var(--black);
+  }
   @media (max-width: 700px) {
     .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
     .demos-grid, .store-grid { grid-template-columns: 1fr; }
@@ -846,51 +912,12 @@
   }
 </style>
 </head>
-<body class="page-about">
-<nav class="hero-nav">
-  <a href="index.html" style="text-decoration:none;">
-    <div class="hero-logo">Tender Anomalies</div>
-  </a>
-  <div class="hero-nav-links">
-    <a href="music.html">Music</a>
-    <a href="demos.html">Demos</a>
-    <a href="about.html">About</a>
-    <a href="store.html">Store</a>
-    <a href="photos.html">Photos</a>
-    <a href="connect.html">Connect</a>
-  </div>
-</nav>
-
-<!-- ── ABOUT ─────────────────────────────────── -->
-<section class="about-section nav-below-fixed" id="about">
-  <div class="about-left">
-    <div class="about-quote">
-      The sound underneath the words — <em>recorded in the space between.</em>
-    </div>
-    <div class="about-body">
-      <p>Tender Anomalies is the solo music project of Sushant Shrestha. The project began as a place to hold what the poems couldn't.</p>
-      <p>The songs move between trip-hop and folk, between the intimate and the cosmic. Sparse. Unhurried. Honest.</p>
-      <p>The debut EP arrives Summer 2026. The home demos are where it started.</p>
-    </div>
-  </div>
-  <div class="about-right">
-    <div class="about-fact">
-      <div class="fact-label">Artist</div>
-      <div class="fact-value">Sushant Shrestha</div>
-    </div>
-    <div class="about-fact">
-      <div class="fact-label">Sound</div>
-      <div class="fact-value">Trip-hop · Indie Folk</div>
-    </div>
-    <div class="about-fact">
-      <div class="fact-label">Poetry</div>
-      <div class="fact-value">ryusho.arts</div>
-    </div>
-    <div class="about-fact">
-      <div class="fact-label">EP Release</div>
-      <div class="fact-value">Summer 2026</div>
-    </div>
-  </div>
-</section>
+<body>
+  <script>window.location.replace("404.html");</script>
 </body>
 </html>
+
+
+
+
+
