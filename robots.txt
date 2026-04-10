@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /about.html
+Disallow: /connect.html
+Disallow: /store.html
+
+Sitemap: https://sushant404.github.io/tender/sitemap.xml
