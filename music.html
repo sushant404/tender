@@ -328,6 +328,24 @@
     white-space: nowrap;
   }
 
+  .ep-intro {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gray4);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .ep-tracklist-note {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--gray3);
+    margin-bottom: 4rem;
+  }
+
   .credits-block {
     margin-top: 4rem;
     padding-top: 2.5rem;
@@ -898,6 +916,7 @@
   </a>
   <div class="hero-nav-links">
     <a href="music.html">Music</a>
+    <a href="demos.html">Demos</a>
     <a href="about.html">About</a>
     <a href="store.html">Store</a>
     <a href="photos.html">Photos</a>
@@ -905,16 +924,12 @@
   </div>
 </nav>
 
-<!-- ── DEMOS ────────────────────────────────── -->
-<section class="demos-section nav-below-fixed" id="demos">
+<!-- ── MUSIC / EP ───────────────────────────── -->
+<section class="demos-section nav-below-fixed" id="music">
   <div class="section-num">01 · Music</div>
-  <div class="section-title">Home<br>Demos</div>
-  <div class="demos-grid" id="demos-grid"></div>
-  <div class="demos-soundcloud">
-    <div class="sc-line"></div>
-    <a class="sc-link" href="https://soundcloud.com/tender-anomalies">Listen on SoundCloud →</a>
-    <div class="sc-line"></div>
-  </div>
+  <div class="section-title">The EP</div>
+  <p class="ep-intro">Debut EP · Summer 2026</p>
+  <p class="ep-tracklist-note">Full track listing coming soon.</p>
   <div class="credits-block">
     <div class="credits-title">Production Credits</div>
     <div class="credits-grid">
@@ -938,22 +953,5 @@
   </div>
 </section>
 
-<script>
-// DEMOS
-const demos = [
-  {n:'01', title:'Becoming', desc:'The first one. Recorded at 5am before anything else started.', dur:'3:42'},
-  {n:'02', title:'Threshold', desc:'Standing in a doorway. The moment before movement.', dur:'4:18'},
-  {n:'03', title:'Not Here Anymore', desc:'Where do you go when you leave yourself?', dur:'3:56'},
-  {n:'04', title:'Belonging', desc:'The one that started everything. Still unfinished.', dur:'5:11'},
-];
-document.getElementById('demos-grid').innerHTML = demos.map(d => `
-  <div class="demo-track">
-    <div class="demo-num">${d.n}</div>
-    <div class="demo-name">${d.title}</div>
-    <div class="demo-desc">${d.desc}</div>
-    <div class="demo-dur">${d.dur} · Home Demo · 2025</div>
-    <div class="demo-play">▶</div>
-  </div>`).join('');
-</script>
 </body>
 </html>
