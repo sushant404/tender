@@ -339,6 +339,50 @@
     margin-left: 2px;
   }
 
+  .equalizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .equalizer.active {
+    opacity: 1;
+  }
+
+  .equalizer span {
+    display: block;
+    width: 2px;
+    background: var(--black);
+    border-radius: 1px;
+    animation: none;
+    height: 3px;
+  }
+
+  .equalizer.active span:nth-child(1) {
+    animation: eq 0.8s ease-in-out infinite alternate;
+    animation-delay: 0s;
+  }
+  .equalizer.active span:nth-child(2) {
+    animation: eq 0.8s ease-in-out infinite alternate;
+    animation-delay: 0.2s;
+  }
+  .equalizer.active span:nth-child(3) {
+    animation: eq 0.8s ease-in-out infinite alternate;
+    animation-delay: 0.15s;
+  }
+  .equalizer.active span:nth-child(4) {
+    animation: eq 0.8s ease-in-out infinite alternate;
+    animation-delay: 0.3s;
+  }
+
+  @keyframes eq {
+    0%  { height: 3px; }
+    100% { height: 14px; }
+  }
+
   .demo-name {
     font-family: 'IM Fell English', serif;
     font-style: italic;
@@ -1029,6 +1073,9 @@
       <button class="demo-play-btn" data-index="0" aria-label="Play Schuyler">
         <span class="play-icon">▶</span>
       </button>
+      <div class="equalizer" id="eq-0">
+        <span></span><span></span><span></span><span></span>
+      </div>
       <div class="demo-name">Schuyler</div>
     </div>
     <div class="demo-track">
@@ -1036,6 +1083,9 @@
       <button class="demo-play-btn" data-index="1" aria-label="Play California Heavy">
         <span class="play-icon">▶</span>
       </button>
+      <div class="equalizer" id="eq-1">
+        <span></span><span></span><span></span><span></span>
+      </div>
       <div class="demo-name">California Heavy</div>
     </div>
     <div class="demo-track">
@@ -1043,6 +1093,9 @@
       <button class="demo-play-btn" data-index="2" aria-label="Play Deep Forbidden Lake Alternate">
         <span class="play-icon">▶</span>
       </button>
+      <div class="equalizer" id="eq-2">
+        <span></span><span></span><span></span><span></span>
+      </div>
       <div class="demo-name">Deep Forbidden Lake (Alternate Version)</div>
     </div>
     <div class="demo-track">
@@ -1050,6 +1103,9 @@
       <button class="demo-play-btn" data-index="3" aria-label="Play Deep Forbidden Lake">
         <span class="play-icon">▶</span>
       </button>
+      <div class="equalizer" id="eq-3">
+        <span></span><span></span><span></span><span></span>
+      </div>
       <div class="demo-name">Deep Forbidden Lake</div>
     </div>
   </div>
@@ -1074,31 +1130,34 @@
     const btns = document.querySelectorAll('.demo-play-btn');
     let currentIndex = null;
 
-    widgets.forEach((widget, i) => {
-      widget.bind(SC.Widget.Events.FINISH, () => {
-        btns[i].querySelector('.play-icon').textContent = '▶';
-        currentIndex = null;
-      });
-    });
+    const eqs = [0,1,2,3].map(i => document.getElementById('eq-' + i));
 
     btns.forEach((btn, i) => {
       btn.addEventListener('click', () => {
         if (currentIndex === i) {
-          // pause current
           widgets[i].pause();
           btn.querySelector('.play-icon').textContent = '▶';
+          eqs[i].classList.remove('active');
           currentIndex = null;
         } else {
-          // stop previous
           if (currentIndex !== null) {
             widgets[currentIndex].pause();
             btns[currentIndex].querySelector('.play-icon').textContent = '▶';
+            eqs[currentIndex].classList.remove('active');
           }
-          // play new
           widgets[i].play();
           btn.querySelector('.play-icon').textContent = '■';
+          eqs[i].classList.add('active');
           currentIndex = i;
         }
+      });
+    });
+
+    widgets.forEach((widget, i) => {
+      widget.bind(SC.Widget.Events.FINISH, () => {
+        btns[i].querySelector('.play-icon').textContent = '▶';
+        eqs[i].classList.remove('active');
+        currentIndex = null;
       });
     });
   </script>
