@@ -289,72 +289,44 @@
     margin-bottom: 3rem;
     letter-spacing: -0.02em;
   }
-  .demos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .demos-list {
+    display: flex;
+    flex-direction: column;
     gap: 0;
-    border: 1px solid var(--black);
   }
+
   .demo-track {
-    padding: 2rem;
-    border-right: 1px solid var(--black);
-    border-bottom: 1px solid var(--black);
-    position: relative;
-    cursor: pointer;
-    transition: background 0.15s;
+    border-bottom: 0.5px solid var(--gray2);
+    padding: 1.5rem 0;
   }
-  .demo-track:nth-child(even) { border-right: none; }
-  .demo-track:nth-child(n+3) { border-bottom: none; }
-  .demo-track:hover { background: var(--black); color: var(--white); }
-  .demo-track:hover .demo-num { color: rgba(255,255,255,0.2); }
-  .demo-track:hover .demo-name { color: var(--white); }
-  .demo-track:hover .demo-dur { color: rgba(255,255,255,0.4); }
+
+  .demo-info {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
   .demo-num {
     font-family: 'Unbounded', sans-serif;
-    font-weight: 900;
-    font-size: 48px;
-    color: rgba(0,0,0,0.06);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    transition: color 0.15s;
-  }
-  .demo-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 22px;
-    color: var(--black);
-    margin-bottom: 0.25rem;
-    transition: color 0.15s;
-  }
-  .demo-desc {
-    font-family: 'Special Elite', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--gray4);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    transition: color 0.15s;
-  }
-  .demo-track:hover .demo-desc { color: rgba(255,255,255,0.35); }
-  .demo-dur {
-    font-family: 'Special Elite', monospace;
+    font-weight: 200;
     font-size: 9px;
     letter-spacing: 0.2em;
     color: var(--gray4);
-    transition: color 0.15s;
   }
-  .demo-play {
-    position: absolute;
-    bottom: 2rem; right: 2rem;
-    width: 36px; height: 36px;
-    border: 1px solid currentColor;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px;
-    opacity: 0;
-    transition: opacity 0.15s;
+
+  .demo-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--black);
   }
-  .demo-track:hover .demo-play { opacity: 1; }
+
+  iframe {
+    border: none;
+    display: block;
+  }
+
   .demos-soundcloud {
     margin-top: 2rem;
     display: flex;
@@ -957,7 +929,7 @@
   }
   @media (max-width: 700px) {
     .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .demos-grid, .store-grid { grid-template-columns: 1fr; }
+    .store-grid { grid-template-columns: 1fr; }
     .store-item { border-right: none; border-bottom: 1px solid var(--black); }
     .store-item:last-child { border-bottom: none; }
     .photos-grid { grid-template-columns: 1fr 1fr; }
@@ -1020,7 +992,49 @@
 <section class="demos-section nav-below-fixed" id="demos">
   <div class="section-title">Home<br>Demos</div>
   <p class="demos-intro">Recorded alone. Where the songs began.</p>
-  <div class="demos-grid" id="demos-grid"></div>
+  <div class="demos-list">
+
+    <div class="demo-track">
+      <div class="demo-info">
+        <div class="demo-num">01</div>
+        <div class="demo-name">Schuyler</div>
+      </div>
+      <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/AnuBlQjw5U7WoZJyZJ&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+      </iframe>
+    </div>
+
+    <div class="demo-track">
+      <div class="demo-info">
+        <div class="demo-num">02</div>
+        <div class="demo-name">California Heavy</div>
+      </div>
+      <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/DigoLG4jCDnLeqJwrt&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+      </iframe>
+    </div>
+
+    <div class="demo-track">
+      <div class="demo-info">
+        <div class="demo-num">03</div>
+        <div class="demo-name">Deep Forbidden Lake (Alternate Version)</div>
+      </div>
+      <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/VsRuZdsnaorXiAJRsD&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+      </iframe>
+    </div>
+
+    <div class="demo-track">
+      <div class="demo-info">
+        <div class="demo-num">04</div>
+        <div class="demo-name">Deep Forbidden Lake</div>
+      </div>
+      <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/DP39I7Mf7ddoueb14N&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+      </iframe>
+    </div>
+
+  </div>
   <div class="demos-soundcloud">
     <div class="sc-line"></div>
     <a class="sc-link" href="https://soundcloud.com/tender-anomalies">Listen on SoundCloud →</a>
@@ -1028,23 +1042,6 @@
   </div>
 </section>
 
-<script>
-// DEMOS
-const demos = [
-  {n:'01', title:'Becoming', desc:'The first one. Recorded at 5am before anything else started.', dur:'3:42'},
-  {n:'02', title:'Threshold', desc:'Standing in a doorway. The moment before movement.', dur:'4:18'},
-  {n:'03', title:'Not Here Anymore', desc:'Where do you go when you leave yourself?', dur:'3:56'},
-  {n:'04', title:'Belonging', desc:'The one that started everything. Still unfinished.', dur:'5:11'},
-];
-document.getElementById('demos-grid').innerHTML = demos.map(d => `
-  <div class="demo-track">
-    <div class="demo-num">${d.n}</div>
-    <div class="demo-name">${d.title}</div>
-    <div class="demo-desc">${d.desc}</div>
-    <div class="demo-dur">${d.dur} · Home Demo · 2025</div>
-    <div class="demo-play"></div>
-  </div>`).join('');
-</script>
 <footer class="site-footer">
   <div class="footer-copy">
     &copy; 2026 Tender Anomalies Music &nbsp;&middot;&nbsp; Pacific Northwest &amp; Bay Area &nbsp;&middot;&nbsp;
