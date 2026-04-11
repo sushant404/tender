@@ -383,13 +383,11 @@
   }
 
   .vinyl-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
     float: right;
     margin: -7rem 0 2rem 3rem;
-    gap: 1.2rem;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .vinyl-record {
@@ -397,17 +395,46 @@
     width: 384px;
     height: 384px;
     border-radius: 50%;
-    background: radial-gradient(
-      circle at center,
-      #1a1a1a 0%,
-      #0d0d0d 60%,
-      #111 80%,
-      #0a0a0a 100%
-    );
-    box-shadow:
-      0 0 0 1px rgba(0,0,0,0.15),
-      0 8px 30px rgba(0,0,0,0.2);
     animation: spin 11.4s linear infinite;
+    background:
+      /* Rim highlight */
+      radial-gradient(circle at 30% 25%, rgba(255,255,255,0.07) 0%, transparent 50%),
+      /* Groove sheen */
+      conic-gradient(
+        from 0deg,
+        #111 0deg, #1c1c1c 2deg, #111 4deg,
+        #1a1a1a 6deg, #0f0f0f 8deg, #1c1c1c 10deg,
+        #111 12deg, #181818 14deg, #111 16deg,
+        #1c1c1c 18deg, #0f0f0f 20deg, #111 22deg,
+        #1a1a1a 24deg, #111 26deg, #1c1c1c 28deg,
+        #0f0f0f 30deg, #111 32deg, #1a1a1a 34deg,
+        #111 36deg, #1c1c1c 38deg, #0f0f0f 40deg,
+        #111 42deg, #181818 44deg, #111 46deg,
+        #1c1c1c 48deg, #0f0f0f 50deg, #111 52deg,
+        #1a1a1a 54deg, #111 56deg, #1c1c1c 58deg,
+        #0f0f0f 60deg, #111 90deg, #1a1a1a 120deg,
+        #111 150deg, #1c1c1c 180deg, #0f0f0f 210deg,
+        #111 240deg, #1a1a1a 270deg, #111 300deg,
+        #1c1c1c 330deg, #111 360deg
+      );
+    box-shadow:
+      0 0 0 2px #0a0a0a,
+      0 0 0 3px rgba(255,255,255,0.04),
+      0 20px 60px rgba(0,0,0,0.5),
+      inset 0 0 40px rgba(0,0,0,0.8);
+  }
+
+  .vinyl-grooves {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+      circle at center,
+      transparent 0px,
+      transparent 3px,
+      rgba(255,255,255,0.015) 3px,
+      rgba(255,255,255,0.015) 4px
+    );
   }
 
   @keyframes spin {
@@ -415,83 +442,80 @@
     to   { transform: rotate(360deg); }
   }
 
-  .groove {
+  .vinyl-center-label {
     position: absolute;
-    border-radius: 50%;
-    border: 0.5px solid rgba(255,255,255,0.05);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .groove-1 { width: 99%; height: 99%; }
-  .groove-2 { width: 90%; height: 90%; }
-  .groove-3 { width: 82%; height: 82%; }
-
-  .vinyl-label {
-    position: absolute;
-    width: 78%;
-    height: 78%;
+    width: 36%;
+    height: 36%;
     border-radius: 50%;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     overflow: hidden;
+    background: #f0ede6;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.2),
+      inset 0 0 10px rgba(0,0,0,0.1);
   }
 
-  .vinyl-label img {
+  .vinyl-center-label img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    opacity: 0.9;
-    filter: brightness(1.2);
+    opacity: 0.25;
   }
 
-  .vinyl-label-text {
+  .vinyl-center-text {
     position: relative;
     z-index: 2;
     text-align: center;
-    background: rgba(0,0,0,0.5);
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 1rem;
+    gap: 3px;
+    padding: 0.5rem;
   }
 
   .vinyl-artist {
     font-family: 'Unbounded', sans-serif;
-    font-weight: 300;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.9);
+    font-weight: 400;
+    font-size: 7px;
+    letter-spacing: 0.15em;
+    color: #1a1a1a;
     text-transform: uppercase;
   }
 
-  .vinyl-title {
+  .vinyl-ep-title {
     font-family: 'IM Fell English', serif;
     font-style: italic;
-    font-size: 16px;
-    color: rgba(255,255,255,0.8);
+    font-size: 11px;
+    color: #2a2a2a;
+    letter-spacing: 0.02em;
+  }
+
+  .vinyl-ep-sub {
+    font-family: 'Special Elite', monospace;
+    font-size: 6px;
+    letter-spacing: 0.2em;
+    color: #888;
+    text-transform: uppercase;
+    margin-top: 2px;
   }
 
   .vinyl-hole {
     position: absolute;
-    width: 4%;
-    height: 4%;
+    width: 6%;
+    height: 6%;
     border-radius: 50%;
-    background: var(--white);
+    background: #1a1a1a;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
   }
 
   .vinyl-record:hover {
@@ -1179,17 +1203,19 @@
   <p class="ep-intro">Debut EP · Summer 2026</p>
   <div class="vinyl-wrap">
     <div class="vinyl-record">
-      <div class="groove groove-1"></div>
-      <div class="groove groove-2"></div>
-      <div class="groove groove-3"></div>
-      <div class="vinyl-label">
-        <img src="assets/images/ep-cover.png" alt="Tender Anomalies - Mist & Memories" />
-        <div class="vinyl-label-text">
+      <!-- Groove rings -->
+      <div class="vinyl-grooves"></div>
+
+      <!-- Center label -->
+      <div class="vinyl-center-label">
+        <img src="assets/images/ep-cover.png" alt="EP Cover" />
+        <div class="vinyl-center-text">
           <div class="vinyl-artist">Tender Anomalies</div>
-          <div class="vinyl-title">Mist &amp; Memories</div>
+          <div class="vinyl-ep-title">Mist &amp; Memories</div>
+          <div class="vinyl-ep-sub">Debut EP · 2026</div>
         </div>
+        <div class="vinyl-hole"></div>
       </div>
-      <div class="vinyl-hole"></div>
     </div>
   </div>
   <div class="tracklist">
