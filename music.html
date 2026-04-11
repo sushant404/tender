@@ -133,15 +133,6 @@
   .hero-nav-links a:hover { color: var(--white); }
 
 
-  .nav-divider {
-    display: inline-block;
-    width: 0.5px;
-    height: 10px;
-    background: rgba(0,0,0,0.15);
-    margin: 0 0.6rem;
-    vertical-align: middle;
-  }
-
   .nav-social {
     display: inline-flex;
     align-items: center;
@@ -160,16 +151,25 @@
     color: rgba(0,0,0,0.9);
   }
 
+  .nav-divider {
+    display: inline-block;
+    width: 0.5px;
+    height: 10px;
+    background: rgba(0,0,0,0.15);
+    margin: 0 0.6rem;
+    vertical-align: middle;
+  }
+
   .hero-nav .nav-divider {
     background: rgba(0,0,0,0.15);
   }
 
   .hero-nav .nav-social {
-    color: rgba(0,0,0,0.3);
+    color: rgba(0,0,0,0.35);
   }
 
   .hero-nav .nav-social:hover {
-    color: rgba(0,0,0,0.8);
+    color: rgba(0,0,0,0.9);
   }
 
   .hero-center {
@@ -380,6 +380,119 @@
     color: var(--gray4);
     text-transform: uppercase;
     margin-bottom: 1rem;
+  }
+
+  .vinyl-wrap {
+    float: right;
+    margin: 0 0 2rem 3rem;
+    clear: right;
+  }
+
+  .vinyl-record {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at center,
+      #1a1a1a 0%,
+      #0d0d0d 60%,
+      #111 80%,
+      #0a0a0a 100%
+    );
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.15),
+      0 8px 30px rgba(0,0,0,0.2);
+    animation: spin 8s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .groove {
+    position: absolute;
+    border-radius: 50%;
+    border: 0.5px solid rgba(255,255,255,0.05);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .groove-1 { width: 99%; height: 99%; }
+  .groove-2 { width: 90%; height: 90%; }
+  .groove-3 { width: 82%; height: 82%; }
+
+  .vinyl-label {
+    position: absolute;
+    width: 78%;
+    height: 78%;
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vinyl-label img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    opacity: 0.9;
+    filter: brightness(1.2);
+  }
+
+  .vinyl-label-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 1rem;
+  }
+
+  .vinyl-artist {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+  }
+
+  .vinyl-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .vinyl-hole {
+    position: absolute;
+    width: 4%;
+    height: 4%;
+    border-radius: 50%;
+    background: var(--white);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+  }
+
+  .vinyl-record:hover {
+    animation-play-state: paused;
+    cursor: pointer;
   }
 
   .ep-tracklist-note {
@@ -1060,6 +1173,21 @@
 <section class="demos-section nav-below-fixed" id="music">
   <div class="section-title">The EP</div>
   <p class="ep-intro">Debut EP · Summer 2026</p>
+  <div class="vinyl-wrap">
+    <div class="vinyl-record">
+      <div class="groove groove-1"></div>
+      <div class="groove groove-2"></div>
+      <div class="groove groove-3"></div>
+      <div class="vinyl-label">
+        <img src="assets/images/ep-cover.png" alt="Tender Anomalies - Mist & Memories" />
+        <div class="vinyl-label-text">
+          <div class="vinyl-artist">Tender Anomalies</div>
+          <div class="vinyl-title">Mist &amp; Memories</div>
+        </div>
+      </div>
+      <div class="vinyl-hole"></div>
+    </div>
+  </div>
   <div class="tracklist">
     <div class="track-row">
       <div class="track-num">01</div>
