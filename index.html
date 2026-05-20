@@ -50,20 +50,40 @@
   .hero {
     background: var(--black);
     color: var(--white);
-    min-height: 85vh;
     display: block;
     position: relative;
     overflow: hidden;
   }
 
   .hero-image {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 80px;
     z-index: 1;
-    background-image: url('assets/photos/heroimage.png');
-    background-size: contain;
-    background-position: right center;
-    background-repeat: no-repeat;
+    opacity: 0.44;
+    mix-blend-mode: luminosity;
+    mask-image: radial-gradient(
+      ellipse 55% 85% at 75% 50%,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,0.7) 45%,
+      rgba(0,0,0,0) 80%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 55% 85% at 75% 50%,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,0.7) 45%,
+      rgba(0,0,0,0) 80%
+    );
+  }
+
+  .hero-img {
+    display: block;
+    width: 75%;
+    height: auto;
+    object-fit: cover;
+    object-position: right center;
   }
 
   /* Big circle - like a vinyl record or album art */
@@ -114,7 +134,7 @@
     background: var(--black);
     border-bottom: 0.5px solid rgba(255,255,255,0.1);
   }
-  .hero.nav-below-fixed { padding-top: 64px; }
+  .hero.nav-below-fixed { padding-top: 0; }
   .demos-section.nav-below-fixed { padding-top: calc(6rem + 64px); }
   .about-section.nav-below-fixed { padding-top: calc(7rem + 64px); }
   .store-section.nav-below-fixed { padding-top: calc(6rem + 64px); }
@@ -928,8 +948,6 @@
     margin-bottom: 2.5rem;
   }
   @media (max-width: 700px) {
-    .hero { min-height: 70vh; }
-    .hero-image { background-position: 70% center; }
     .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
     .demos-grid, .store-grid { grid-template-columns: 1fr; }
     .store-item { border-right: none; border-bottom: 1px solid var(--black); }
@@ -992,7 +1010,9 @@
 
 <!--  HERO  -->
 <section class="hero nav-below-fixed">
-  <div class="hero-image"></div>
+  <div class="hero-image">
+    <img src="assets/photos/heroimage.png" alt="" class="hero-img" />
+  </div>
   <div class="hero-tagline">Debut EP · Summer 2026</div>
 </section>
 
@@ -1047,10 +1067,7 @@ tick(); setInterval(tick,1000);
 </script>
 <footer class="site-footer">
   <div class="footer-copy">
-    &copy; 2026 Tender Anomalies Music &nbsp;&middot;&nbsp; Pacific Northwest &amp; Bay Area &nbsp;&middot;&nbsp;
-    <a href="https://ryusho.art" target="_blank" rel="noopener">ryusho.art</a>
-    &nbsp;&middot;&nbsp;
-    <a href="https://www.sushantshrestha.com" target="_blank" rel="noopener">sushantshrestha.com</a>
+    &copy; 2026 Tender Anomalies Music &nbsp;&middot;&nbsp; Pacific Northwest &amp; Bay Area
   </div>
 </footer></body>
 </html>
