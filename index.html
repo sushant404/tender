@@ -50,9 +50,8 @@
   .hero {
     background: var(--black);
     color: var(--white);
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: 1fr auto;
+    min-height: 85vh;
+    display: block;
     position: relative;
     overflow: hidden;
   }
@@ -61,24 +60,10 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background-image: url('assets/photos/suitguitar.webp');
-    background-size: cover;
-    background-position: center top;
+    background-image: url('assets/photos/heroimage.png');
+    background-size: contain;
+    background-position: right center;
     background-repeat: no-repeat;
-    opacity: 0.18;
-    mix-blend-mode: luminosity;
-    mask-image: radial-gradient(
-      ellipse 60% 80% at 50% 40%,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,0.6) 50%,
-      rgba(0,0,0,0) 100%
-    );
-    -webkit-mask-image: radial-gradient(
-      ellipse 60% 80% at 50% 40%,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,0.6) 50%,
-      rgba(0,0,0,0) 100%
-    );
   }
 
   /* Big circle - like a vinyl record or album art */
@@ -914,7 +899,37 @@
     color: var(--black);
     border-color: var(--black);
   }
+
+  /*  NEW: minimal hero tagline overlay  */
+  .hero-tagline {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 2.5rem;
+    right: auto;
+    z-index: 10;
+    text-align: left;
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+  }
+
+  /*  NEW: EP title sitting above the countdown  */
+  .ep-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(48px, 8vw, 92px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
   @media (max-width: 700px) {
+    .hero { min-height: 70vh; }
+    .hero-image { background-position: 70% center; }
     .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
     .demos-grid, .store-grid { grid-template-columns: 1fr; }
     .store-item { border-right: none; border-bottom: 1px solid var(--black); }
@@ -979,12 +994,7 @@
 <!--  HERO  -->
 <section class="hero nav-below-fixed">
   <div class="hero-image"></div>
-  <div class="hero-circle"><div class="hero-dot"></div></div>
-  <div class="hero-center">
-    <div class="hero-title">Mist &amp; Memories</div>
-    <div class="hero-sub">Debut EP · Summer 2026</div>
-    <div class="hero-divider"></div>
-  </div>
+  <div class="hero-tagline">Debut EP · Summer 2026</div>
 </section>
 
 <!--  MARQUEE  -->
@@ -992,9 +1002,9 @@
   <div class="marquee" id="marquee"></div>
 </div>
 
-<!--  COUNTDOWN  -->
+<!--  MIST & MEMORIES — title + countdown  -->
 <section class="countdown-section" id="countdown">
-  <div class="countdown-mark">TA</div>
+  <div class="ep-title">Mist &amp; Memories</div>
   <div class="countdown-eyebrow">The EP Drops In</div>
   <div class="countdown-nums">
     <div class="cd-block"><span class="cd-num" id="cd-d">--</span><div class="cd-unit">Days</div></div>
