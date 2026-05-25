@@ -114,20 +114,27 @@
   .about-page-section {
     background: var(--white);
     color: var(--black);
-    padding: calc(7rem + 64px) 2.5rem 7rem;
+    padding: 64px 2.5rem 7rem;
     border-bottom: 1px solid var(--black);
   }
 
   .about-page-grid {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    --about-column-top-space: clamp(2.5rem, 4vw, 4rem);
     display: grid;
-    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
-    gap: clamp(2.5rem, 6vw, 5.5rem);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: flex-start;
+    gap: 0;
   }
 
-  .about-aside {
+  .about-hero {
     position: sticky;
-    top: calc(5rem + 64px);
+    top: calc(64px + 2rem);
+    margin-top: var(--about-column-top-space);
+    overflow: visible;
+    background: transparent;
   }
 
   .section-num {
@@ -152,23 +159,25 @@
   }
 
   .about-portrait {
-    max-width: 380px;
-    border: 0.5px solid rgba(255,255,255,0.1);
-    background: #111;
-    overflow: hidden;
+    width: 100%;
+    height: auto;
+    overflow: visible;
   }
 
   .about-portrait img {
     display: block;
     width: 100%;
-    aspect-ratio: 2 / 3;
-    object-fit: cover;
-    filter: grayscale(1) contrast(1.02) brightness(0.92);
+    height: auto;
+  }
+
+  .about-content {
+    display: block;
+    padding: var(--about-column-top-space) clamp(2.5rem, 4vw, 4rem) clamp(2.5rem, 4vw, 4rem);
+    background: var(--white);
   }
 
   .about-copy {
     max-width: 64ch;
-    padding-top: 0.5rem;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     font-size: clamp(17px, 1.2vw, 18px);
     line-height: 1.68;
@@ -210,7 +219,7 @@
     text-align: center;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 768px) {
     .hero-nav {
       padding: 1.5rem;
     }
@@ -222,26 +231,38 @@
     }
 
     .about-page-section {
-      padding: calc(6rem + 64px) 1.5rem 5rem;
+      padding: 64px 0 5rem;
     }
 
     .about-page-grid {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
     }
 
-    .about-aside {
+    .about-hero {
+      min-height: 0;
       position: static;
+      top: auto;
+      margin-top: 0;
     }
 
-    .about-portrait {
-      max-width: none;
+    .about-portrait img {
+      height: auto;
     }
 
-    .about-copy {
+    .about-content {
+      display: block;
+      padding: 2rem 1.5rem 0;
+    }
+
+    .about-content .section-title {
+      margin-bottom: 2rem;
+    }
+
+    .about-content .about-copy {
       font-size: 17px;
       line-height: 1.68;
     }
+
   }
 </style>
 </head>
@@ -292,22 +313,26 @@
 
 <section class="about-page-section">
   <div class="about-page-grid">
-    <div class="about-aside">
-      <div class="section-num">About</div>
-      <div class="section-title">About</div>
+    <div class="about-hero">
       <div class="about-portrait">
-        <img src="assets/photos/suitguitar.webp" alt="Sushant Shrestha with guitar">
+        <img src="assets/photos/aboutpagehero.png" alt="Sushant Shrestha" loading="lazy">
       </div>
     </div>
 
-    <div class="about-copy">
-      <p>Sushant Shrestha is a Pacific Northwest recording artist and poet working across music, poetry, and photography. He calls his music mist rock: songs about becoming and belonging, written from the experience of navigating multiple cultural identities and wisdom traditions.</p>
+    <div class="about-content">
+      <div>
+        <div class="section-num">About</div>
+        <div class="section-title">About</div>
+        <div class="about-copy">
+          <p>Sushant Shrestha is a Pacific Northwest recording artist and poet working across music, poetry, and photography. He calls his music mist rock: songs about becoming and belonging, written from the experience of navigating multiple cultural identities and wisdom traditions.</p>
 
-      <p>His poetry, published as <a href="https://ryusho.art" target="_blank" rel="noopener">Ryusho Arts</a>, circles the same preoccupations, longing, the beloved as a kind of doorway, mystery surfacing in ordinary moments. He is an author and co-editor of <a href="https://embracingwholenessindiversity.com" target="_blank" rel="noopener">Embracing Wholeness in Diversity</a>, a forthcoming volume on diversity as a path to wisdom and human flourishing, and has taught graduate-level courses in social transformation, cross-cultural studies, and leadership at John F. Kennedy University. He also works in impact investing, at the intersection of climate, technology, and community.</p>
+          <p>His poetry, published as <a href="https://ryusho.art" target="_blank" rel="noopener">Ryusho Arts</a>, circles the same preoccupations, longing, the beloved as a kind of doorway, mystery surfacing in ordinary moments. He is an author and co-editor of <a href="https://embracingwholenessindiversity.com" target="_blank" rel="noopener">Embracing Wholeness in Diversity</a>, a forthcoming volume on diversity as a path to wisdom and human flourishing, and has taught graduate-level courses in social transformation, cross-cultural studies, and leadership at John F. Kennedy University. He also works in impact investing, at the intersection of climate, technology, and community.</p>
 
-      <p>For him these are not separate pursuits but one life tasted from many angles. The investor, the poet, the musician, the teacher are all asking the same question of how a person becomes whole while holding many worlds at once. Art, science, and spirit move as one life, the same wave finding different shores and depths.</p>
+          <p>For him these are not separate pursuits but one life tasted from many angles. The investor, the poet, the musician, the teacher are all asking the same question of how a person becomes whole while holding many worlds at once. Art, science, and spirit move as one life, the same wave finding different shores and depths.</p>
 
-      <p>Tender Anomalies is the sound of that awareness turned inward: songs for the falling in love and the falling apart, for the mess and the mending, all the while walking between worlds and listening for a home not yet arrived.</p>
+          <p>Tender Anomalies is the sound of that awareness turned inward: songs for the falling in love and the falling apart, for the mess and the mending, all the while walking between worlds and listening for a home not yet arrived.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
