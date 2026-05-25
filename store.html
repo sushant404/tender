@@ -900,6 +900,11 @@ document.getElementById('store-grid').innerHTML = items.map(i => `
     </div>
   </div>`).join('');
 </script>
+<script>
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+</script>
 </body>
 </html>
 
