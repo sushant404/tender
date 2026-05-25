@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tender Anomalies</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;700;900&family=IM+Fell+English:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +34,6 @@
     cursor: crosshair;
   }
 
-  /*  GRAIN OVERLAY  */
   body::before {
     content: '';
     position: fixed; inset: 0; z-index: 999;
@@ -39,53 +42,7 @@
     opacity: 0.6;
   }
 
-  /*  PAGE SECTIONS  */
   .page { min-height: 100vh; position: relative; }
-
-  /*  OPENING / HERO  */
-  .hero {
-    background: var(--black);
-    color: var(--white);
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Big circle - like a vinyl record or album art */
-  .hero-circle {
-    position: absolute;
-    width: 70vmin; height: 70vmin;
-    border: 0.5px solid rgba(255,255,255,0.12);
-    border-radius: 50%;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    animation: slowspin 60s linear infinite;
-  }
-  .hero-circle::before {
-    content: '';
-    position: absolute;
-    inset: 12%;
-    border: 0.5px solid rgba(255,255,255,0.08);
-    border-radius: 50%;
-  }
-  .hero-circle::after {
-    content: '';
-    position: absolute;
-    inset: 30%;
-    border: 0.5px solid rgba(255,255,255,0.06);
-    border-radius: 50%;
-  }
-  .hero-dot {
-    position: absolute;
-    width: 8px; height: 8px;
-    background: var(--white);
-    border-radius: 50%;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  @keyframes slowspin { to { transform: translate(-50%,-50%) rotate(360deg); } }
 
   .hero-nav {
     display: flex;
@@ -100,12 +57,7 @@
     background: var(--black);
     border-bottom: 0.5px solid rgba(255,255,255,0.1);
   }
-  .hero.nav-below-fixed { padding-top: 64px; }
-  .demos-section.nav-below-fixed { padding-top: calc(6rem + 64px); }
-  .about-section.nav-below-fixed { padding-top: calc(7rem + 64px); }
-  .store-section.nav-below-fixed { padding-top: calc(6rem + 64px); }
-  .photos-section.nav-below-fixed { padding-top: calc(6rem + 64px); }
-  .connect-section.nav-below-fixed { padding-top: calc(6rem + 64px); }
+
   .hero-logo {
     font-family: 'Unbounded', sans-serif;
     font-weight: 300;
@@ -114,9 +66,12 @@
     text-transform: uppercase;
     color: var(--white);
   }
+
   .hero-nav-links {
-    display: flex; gap: 2rem;
+    display: flex;
+    gap: 2rem;
   }
+
   .hero-nav-links a {
     font-family: 'Special Elite', monospace;
     font-size: 11px;
@@ -126,8 +81,8 @@
     text-transform: uppercase;
     transition: color 0.2s;
   }
-  .hero-nav-links a:hover { color: var(--white); }
 
+  .hero-nav-links a:hover { color: var(--white); }
 
   .nav-divider {
     display: inline-block;
@@ -156,720 +111,90 @@
     color: rgba(255,255,255,0.9);
   }
 
-  .hero-nav .nav-divider {
-    background: rgba(0,0,0,0.15);
-  }
-
-  .hero-nav .nav-social {
-    color: rgba(0,0,0,0.3);
-  }
-
-  .hero-nav .nav-social:hover {
-    color: rgba(0,0,0,0.8);
-  }
-
-  .hero-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative; z-index: 10;
-    text-align: center;
-    padding: 4rem 2rem;
-  }
-  .hero-issue {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.3em;
-    color: rgba(255,255,255,0.3);
-    margin-bottom: 2.5rem;
-    text-transform: uppercase;
-  }
-  .hero-title {
-    font-family: 'IM Fell English', serif;
-    font-size: clamp(56px, 10vw, 110px);
-    font-style: italic;
-    font-weight: 400;
-    line-height: 0.9;
+  .about-page-section {
+    background: var(--black);
     color: var(--white);
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-  }
-  .hero-title span {
-    display: block;
-    font-style: normal;
-    font-family: 'Unbounded', sans-serif;
-    font-size: 0.28em;
-    letter-spacing: 0.4em;
-    font-weight: 200;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 0.5rem;
-  }
-  .hero-sub {
-    font-family: 'Special Elite', monospace;
-    font-size: 12px;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-top: 2rem;
-  }
-  .hero-divider {
-    width: 1px; height: 60px;
-    background: rgba(255,255,255,0.2);
-    margin: 2rem auto 0;
+    padding: calc(7rem + 64px) 2.5rem 7rem;
+    border-bottom: 1px solid #222;
   }
 
-  .hero-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 2rem 2.5rem;
-    position: relative; z-index: 10;
-    border-top: 0.5px solid rgba(255,255,255,0.08);
-  }
-  .hero-bottom-left {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.2);
-    text-transform: uppercase;
-    line-height: 1.8;
-  }
-  .hero-ep-badge {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-  }
-  .ep-label {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 7px;
-    letter-spacing: 0.3em;
-    color: rgba(255,255,255,0.25);
-    text-transform: uppercase;
-  }
-  .ep-title {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: rgba(255,255,255,0.6);
-  }
-  .ep-date {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    color: rgba(255,255,255,0.2);
+  .about-page-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+    align-items: start;
   }
 
-  /*  DEMOS SECTION  */
-  .demos-section {
-    background: var(--white);
-    padding: 6rem 2.5rem;
-    border-bottom: 1px solid var(--black);
+  .about-aside {
+    position: sticky;
+    top: calc(5rem + 64px);
   }
+
   .section-num {
     font-family: 'Unbounded', sans-serif;
     font-weight: 200;
     font-size: 9px;
     letter-spacing: 0.3em;
-    color: var(--gray4);
+    color: rgba(255,255,255,0.22);
     margin-bottom: 1.5rem;
     text-transform: uppercase;
   }
+
   .section-title {
     font-family: 'IM Fell English', serif;
     font-style: italic;
-    font-size: clamp(36px, 5vw, 58px);
+    font-size: clamp(38px, 5vw, 64px);
     font-weight: 400;
     line-height: 1;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     letter-spacing: -0.02em;
-  }
-  .demos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border: 1px solid var(--black);
-  }
-  .demo-track {
-    padding: 2rem;
-    border-right: 1px solid var(--black);
-    border-bottom: 1px solid var(--black);
-    position: relative;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .demo-track:nth-child(even) { border-right: none; }
-  .demo-track:nth-child(n+3) { border-bottom: none; }
-  .demo-track:hover { background: var(--black); color: var(--white); }
-  .demo-track:hover .demo-num { color: rgba(255,255,255,0.2); }
-  .demo-track:hover .demo-name { color: var(--white); }
-  .demo-track:hover .demo-dur { color: rgba(255,255,255,0.4); }
-  .demo-num {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 900;
-    font-size: 48px;
-    color: rgba(0,0,0,0.06);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    transition: color 0.15s;
-  }
-  .demo-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 22px;
-    color: var(--black);
-    margin-bottom: 0.25rem;
-    transition: color 0.15s;
-  }
-  .demo-desc {
-    font-family: 'Special Elite', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--gray4);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    transition: color 0.15s;
-  }
-  .demo-track:hover .demo-desc { color: rgba(255,255,255,0.35); }
-  .demo-dur {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: var(--gray4);
-    transition: color 0.15s;
-  }
-  .demo-play {
-    position: absolute;
-    bottom: 2rem; right: 2rem;
-    width: 36px; height: 36px;
-    border: 1px solid currentColor;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px;
-    opacity: 0;
-    transition: opacity 0.15s;
-  }
-  .demo-track:hover .demo-play { opacity: 1; }
-  .demos-soundcloud {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .sc-line { flex: 1; height: 0.5px; background: var(--black); }
-  .sc-link {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: var(--black);
-    text-decoration: none;
-    text-transform: uppercase;
-    white-space: nowrap;
+    color: var(--white);
   }
 
-  /*  ABOUT SECTION  */
-  .about-section {
-    background: var(--black);
-    color: var(--white);
-    padding: 7rem 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    border-bottom: 1px solid #222;
-  }
-  .about-left {}
-  .about-quote {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 400;
-    line-height: 1.25;
-    color: var(--white);
-    letter-spacing: -0.02em;
-    margin-bottom: 2rem;
-  }
-  .about-quote em {
-    font-style: normal;
-    opacity: 0.3;
-  }
-  .about-body {
-    font-family: 'Special Elite', monospace;
-    font-size: 11px;
-    line-height: 1.9;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.06em;
-  }
-  .about-body p + p { margin-top: 1rem; }
-  .about-right {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+  .about-portrait {
+    max-width: 380px;
     border: 0.5px solid rgba(255,255,255,0.1);
-  }
-  .about-fact {
-    padding: 1.5rem;
-    border-bottom: 0.5px solid rgba(255,255,255,0.08);
-  }
-  .about-fact:last-child { border-bottom: none; }
-  .fact-label {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 7px;
-    letter-spacing: 0.3em;
-    color: rgba(255,255,255,0.2);
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-  .fact-value {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: rgba(255,255,255,0.75);
-  }
-
-  /*  STORE  */
-  .store-section {
-    background: var(--white);
-    padding: 6rem 2.5rem;
-    border-bottom: 1px solid var(--black);
-  }
-  .store-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 3rem;
-  }
-  .store-note {
-    font-family: 'Special Elite', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--gray4);
-    text-align: right;
-    line-height: 1.7;
-  }
-  .store-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 1px solid var(--black);
-  }
-  .store-item {
-    border-right: 1px solid var(--black);
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .store-item:last-child { border-right: none; }
-  .store-item:hover { background: var(--black); color: var(--white); }
-  .store-img {
-    aspect-ratio: 1;
-    border-bottom: 1px solid var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 64px;
-    color: rgba(0,0,0,0.06);
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.15s;
-  }
-  .store-item:hover .store-img {
-    border-bottom-color: #333;
-    color: rgba(255,255,255,0.05);
-  }
-  /* halftone dots pattern in image */
-  .store-img::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
-    background-size: 12px 12px;
-  }
-  .store-item:hover .store-img::before {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-  }
-  .store-item-info { padding: 1.25rem; }
-  .store-item-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 18px;
-    margin-bottom: 0.25rem;
-    transition: color 0.15s;
-  }
-  .store-item-sub {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    color: var(--gray4);
-    margin-bottom: 1rem;
-    line-height: 1.5;
-    transition: color 0.15s;
-  }
-  .store-item:hover .store-item-sub { color: rgba(255,255,255,0.3); }
-  .store-item-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .store-price {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    transition: color 0.15s;
-  }
-  .store-status {
-    font-family: 'Special Elite', monospace;
-    font-size: 8px;
-    letter-spacing: 0.14em;
-    color: var(--gray4);
-    text-transform: uppercase;
-    transition: color 0.15s;
-  }
-  .store-item:hover .store-status { color: rgba(255,255,255,0.3); }
-
-  /*  RELEASE COUNTDOWN  */
-  .countdown-section {
-    background: var(--black);
-    color: var(--white);
-    padding: 6rem 2.5rem;
-    text-align: center;
-    border-bottom: 0.5px solid #111;
-    position: relative;
+    background: #111;
     overflow: hidden;
   }
-  /* Big "TA" typographic mark */
-  .countdown-mark {
-    position: absolute;
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 900;
-    font-size: 35vw;
-    color: rgba(255,255,255,0.02);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1;
-    pointer-events: none;
-    letter-spacing: -0.08em;
-  }
-  .countdown-eyebrow {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 200;
-    font-size: 9px;
-    letter-spacing: 0.4em;
-    color: rgba(255,255,255,0.2);
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    position: relative;
-  }
-  .countdown-title {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: clamp(32px, 5vw, 56px);
-    color: var(--white);
-    margin-bottom: 4rem;
-    line-height: 1.1;
-    position: relative;
-  }
-  .countdown-nums {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 0;
-    margin-bottom: 4rem;
-    position: relative;
-  }
-  .cd-block {
-    padding: 2rem 2.5rem;
-    border: 0.5px solid rgba(255,255,255,0.08);
-    border-right: none;
-    min-width: 120px;
-  }
-  .cd-block:last-child { border-right: 0.5px solid rgba(255,255,255,0.08); }
-  .cd-num {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 700;
-    font-size: 52px;
-    color: var(--white);
-    line-height: 1;
+
+  .about-portrait img {
     display: block;
-    margin-bottom: 0.5rem;
-  }
-  .cd-unit {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.2);
-    text-transform: uppercase;
-  }
-  .countdown-form {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    max-width: 420px;
-    margin: 0 auto;
-    border: 0.5px solid rgba(255,255,255,0.15);
-    position: relative;
-  }
-  .countdown-form input {
-    flex: 1;
-    font-family: 'Special Elite', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    padding: 1rem 1.25rem;
-    background: transparent;
-    border: none;
-    color: var(--white);
-    outline: none;
-  }
-  .countdown-form input::placeholder { color: rgba(255,255,255,0.2); }
-  .countdown-form button {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 8px;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    padding: 1rem 1.5rem;
-    background: var(--white);
-    color: var(--black);
-    border: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    border-left: 0.5px solid rgba(255,255,255,0.15);
-    transition: background 0.15s, color 0.15s;
-  }
-  .countdown-form button:hover { background: rgba(255,255,255,0.85); }
-
-  /*  PHOTOS SECTION  */
-  .photos-section {
-    background: var(--white);
-    padding: 6rem 2.5rem;
-    border-bottom: 1px solid var(--black);
-  }
-  .photos-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto;
-    gap: 0;
-    border: 1px solid var(--black);
-    margin-top: 3rem;
-  }
-  .photo-cell {
-    border-right: 1px solid var(--black);
-    border-bottom: 1px solid var(--black);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .photo-cell:last-child, .photo-cell:nth-child(4n) { border-right: none; }
-  .photo-cell:nth-child(n+5) { border-bottom: none; }
-  .photo-cell.wide { grid-column: span 2; }
-  .photo-cell.tall { grid-row: span 2; }
-  .photo-placeholder {
     width: 100%;
-    aspect-ratio: 1;
-    background: var(--gray6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.2s;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.02) brightness(0.92);
   }
-  .photo-cell.wide .photo-placeholder { aspect-ratio: 2; }
-  .photo-cell.tall .photo-placeholder { aspect-ratio: 0.5; }
-  .photo-placeholder::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
-    background-size: 10px 10px;
-    opacity: 0.5;
-  }
-  .photo-cell:hover .photo-placeholder { background: var(--black); }
-  .photo-cell:hover .photo-placeholder::before {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-  }
-  .photo-glyph {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 36px;
-    color: rgba(0,0,0,0.08);
-    position: relative;
-    transition: color 0.2s;
-  }
-  .photo-cell:hover .photo-glyph { color: rgba(255,255,255,0.06); }
-  .photo-label {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    color: rgba(0,0,0,0.2);
-    position: relative;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .photo-cell:hover .photo-label { color: rgba(255,255,255,0.15); }
-  .photo-caption {
-    padding: 0.875rem 1rem;
-    border-top: 0.5px solid var(--black);
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .photo-cell:hover .photo-caption { background: var(--black); border-top-color: #222; }
-  .photo-cap-title {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--black);
-    transition: color 0.2s;
-  }
-  .photo-cell:hover .photo-cap-title { color: var(--white); }
-  .photo-cap-sub {
-    font-family: 'Special Elite', monospace;
-    font-size: 8px;
-    letter-spacing: 0.1em;
-    color: var(--gray4);
-    margin-top: 2px;
-    transition: color 0.2s;
-  }
-  .photo-cell:hover .photo-cap-sub { color: rgba(255,255,255,0.25); }
 
-  /*  CONNECT / FOOTER  */
-  .connect-section {
-    background: var(--black);
-    color: var(--white);
-    padding: 6rem 2.5rem 4rem;
-  }
-  .connect-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-    margin-bottom: 5rem;
-  }
-  .connect-left {}
-  .connect-title {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: clamp(36px, 5vw, 60px);
-    font-weight: 400;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-  .connect-body {
+  .about-copy {
+    max-width: 64ch;
+    padding-top: 0.5rem;
     font-family: 'Special Elite', monospace;
-    font-size: 11px;
-    line-height: 1.9;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.06em;
+    font-size: clamp(12px, 1.08vw, 14px);
+    line-height: 2.05;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.72);
   }
-  .connect-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border: 0.5px solid rgba(255,255,255,0.1);
+
+  .about-copy p + p {
+    margin-top: 1.9rem;
   }
-  .connect-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
-    border-bottom: 0.5px solid rgba(255,255,255,0.07);
+
+  .about-copy a {
+    color: inherit;
     text-decoration: none;
-    color: rgba(255,255,255,0.55);
-    transition: background 0.15s, color 0.15s;
-    cursor: pointer;
-  }
-  .connect-link:last-child { border-bottom: none; }
-  .connect-link:hover { background: rgba(255,255,255,0.04); color: var(--white); }
-  .cl-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 16px;
-  }
-  .cl-arrow {
-    font-family: 'Special Elite', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    opacity: 0.3;
+    border-bottom: 0.5px solid currentColor;
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s, opacity 0.2s;
+    opacity: 0.95;
   }
 
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-top: 2rem;
-    border-top: 0.5px solid rgba(255,255,255,0.06);
-  }
-  .footer-copy {
-    font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.15);
-    line-height: 1.8;
-    text-transform: uppercase;
-  }
-  .footer-logo {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 28px;
-    color: rgba(255,255,255,0.08);
-    letter-spacing: -0.02em;
+  .about-copy a:hover {
+    color: var(--white);
+    border-color: var(--white);
+    opacity: 1;
   }
 
-  /*  HORIZONTAL RULE  */
-  .rule {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin: 4rem 0;
-  }
-  .rule-line { flex: 1; height: 0.5px; background: rgba(255,255,255,0.08); }
-  .rule-text {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 200;
-    font-size: 7px;
-    letter-spacing: 0.4em;
-    color: rgba(255,255,255,0.12);
-    text-transform: uppercase;
-  }
-
-  /*  HORIZONTAL MARQUEE  */
-  .marquee-wrap {
-    overflow: hidden;
-    border-top: 0.5px solid var(--black);
-    border-bottom: 0.5px solid var(--black);
-    padding: 0;
-    background: var(--white);
-  }
-  .marquee {
-    display: flex;
-    white-space: nowrap;
-    animation: marquee 25s linear infinite;
-    width: max-content;
-  }
-  @keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
-  .marquee-item {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    color: var(--black);
-    padding: 0.7rem 2rem;
-    border-right: 0.5px solid var(--gray6);
-    display: inline-flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  .marquee-dot {
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    background: var(--black);
-    flex-shrink: 0;
-  }
   .site-footer {
     padding: 2rem 2.5rem;
     border-top: 0.5px solid var(--gray2);
@@ -885,39 +210,112 @@
     text-align: center;
   }
 
-  .site-footer .footer-copy a {
-    color: var(--gray4);
-    text-decoration: none;
-    border-bottom: 0.5px solid var(--gray4);
-    padding-bottom: 1px;
-    transition: color 0.2s;
-  }
-
-  .site-footer .footer-copy a:hover {
-    color: var(--black);
-    border-color: var(--black);
-  }
   @media (max-width: 700px) {
-    .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .demos-grid, .store-grid { grid-template-columns: 1fr; }
-    .store-item { border-right: none; border-bottom: 1px solid var(--black); }
-    .store-item:last-child { border-bottom: none; }
-    .photos-grid { grid-template-columns: 1fr 1fr; }
-    .photo-cell.wide { grid-column: span 2; }
-    .cd-block { min-width: 70px; padding: 1.25rem; }
-    .cd-num { font-size: 36px; }
-    .hero-title { font-size: 52px; }
-    .store-grid { border: none; }
-    .store-item { border: 1px solid var(--black); margin-bottom: -1px; }
+    .hero-nav {
+      padding: 1.5rem;
+    }
+
+    .hero-nav-links {
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .about-page-section {
+      padding: calc(6rem + 64px) 1.5rem 5rem;
+    }
+
+    .about-page-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .about-aside {
+      position: static;
+    }
+
+    .about-portrait {
+      max-width: none;
+    }
+
+    .about-copy {
+      font-size: 13px;
+      line-height: 2;
+    }
   }
 </style>
 </head>
-<body>
-  <script>window.location.replace("404.html");</script>
+<body class="page-about">
+<nav class="hero-nav">
+  <a href="index.html" style="text-decoration:none;">
+    <div class="hero-logo">Tender Anomalies</div>
+  </a>
+  <div class="hero-nav-links">
+    <a href="music.html">Music</a>
+    <a href="about.html">About</a>
+    <a href="photos.html">Photos</a>
+    <span class="nav-divider"></span>
+
+    <a class="nav-social" href="https://www.instagram.com/tenderanomalies/" target="_blank" rel="noopener" title="Instagram">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+
+    <a class="nav-social" href="https://soundcloud.com/tender-anomalies" target="_blank" rel="noopener" title="SoundCloud">
+      <svg width="15" height="13" viewBox="0 0 24 18" fill="currentColor">
+        <path d="M0 11.5C0 13.4 1.6 15 3.5 15H17c2.2 0 4-1.8 4-4 0-1.9-1.3-3.5-3.1-3.9C17.6 3.8 15.5 2 13 2c-1.7 0-3.2.8-4.2 2C8.2 3.7 7.6 3.5 7 3.5 5.1 3.5 3.5 5 3.4 6.9 1.5 7.4 0 9.3 0 11.5z"/>
+      </svg>
+    </a>
+
+    <a class="nav-social" href="https://www.youtube.com/@tenderanomalies" target="_blank" rel="noopener" title="YouTube">
+      <svg width="15" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 2.8 12 2.8 12 2.8s-4.2 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.8 9.2.8 11.5v2.1c0 2.3.2 4.5.2 4.5s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.5 22.2 12 22.2 12 22.2s4.2 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.2-2.2.2-4.5v-2.1C23.2 9.2 23 7 23 7zM9.7 15.5V8.4l8.1 3.6-8.1 3.5z"/>
+      </svg>
+    </a>
+
+    <a class="nav-social" href="https://linktr.ee/tenderanomalies" target="_blank" rel="noopener" title="Linktree">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13.5 5.5l4-4.5h-3.5V0h-4v1L13.5 5.5zM10.5 5.5l-4-4.5H10V0h4v1L10.5 5.5zM10 6h4v10h-4zM7 13h10v2H7zM8.5 17h7v2h-7zM9.5 21h5v3h-5z"/>
+      </svg>
+    </a>
+
+    <a class="nav-social" href="https://www.tiktok.com/@tenderanomalies" target="_blank" rel="noopener" title="TikTok">
+      <svg width="12" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.6 3.3C18.5 2 17.9.6 17.8 0h-3.6v16.4c0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-1.7 1.4-3.1 3.1-3.1.3 0 .6 0 .9.1V9.7c-.3 0-.6-.1-.9-.1C6.8 9.6 3.6 12.8 3.6 16.7c0 3.9 3.2 7.1 7.1 7.1 3.9 0 7.1-3.2 7.1-7.1V8.2c1.4 1 3 1.6 4.8 1.6V6.2c-1.1 0-2.2-.4-3-1z"/>
+      </svg>
+    </a>
+  </div>
+</nav>
+
+<section class="about-page-section">
+  <div class="about-page-grid">
+    <div class="about-aside">
+      <div class="section-num">About</div>
+      <div class="section-title">About</div>
+      <div class="about-portrait">
+        <img src="assets/photos/suitguitar.webp" alt="Sushant Shrestha with guitar">
+      </div>
+    </div>
+
+    <div class="about-copy">
+      <p>Sushant Shrestha is a Pacific Northwest artist and poet working across music, poetry, and image. He calls his music mist rock: songs about becoming and belonging, written from the experience of navigating multiple cultural identities and wisdom traditions.</p>
+
+      <p>His poetry, published as <a href="https://ryusho.art" target="_blank" rel="noopener">Ansui Ryusho</a>, circles the same preoccupations, longing, the beloved as a kind of doorway, mystery surfacing in ordinary moments. He is an author and co-editor of <a href="https://embracingwholenessindiversity.com" target="_blank" rel="noopener">Embracing Wholeness in Diversity</a>, a forthcoming volume on diversity as a path to wisdom and human flourishing, and has taught graduate-level courses in social transformation, cross-cultural studies, and leadership. He also works in impact investing, at the intersection of climate, technology, and community.</p>
+
+      <p>For him these are not separate pursuits but one life tasted from many angles. The investor, the poet, the musician, the teacher are all asking the same question of how a person becomes whole while holding many worlds at once. Art, science, and spirit move as one life, the same current finding different shores.</p>
+
+      <p>Tender Anomalies is the sound of that attention turned inward: songs for the falling in love and the falling apart, for the mess and the mending, for those who have walked between worlds and listened for a home not yet arrived.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-copy">
+    &copy; 2026 Tender Anomalies Music &nbsp;&middot;&nbsp; Pacific Northwest &amp; Bay Area
+  </div>
+</footer>
 </body>
 </html>
-
-
-
-
-
