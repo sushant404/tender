@@ -4,4 +4,4 @@ Disallow: /about.html
 Disallow: /connect.html
 Disallow: /store.html
 
-Sitemap: https://sushant404.github.io/tender/sitemap.xml
+Sitemap: https://tenderanomalies.com/sitemap.xml
