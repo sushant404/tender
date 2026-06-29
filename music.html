@@ -384,7 +384,7 @@
 
   .releases-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
   }
@@ -416,9 +416,28 @@
     object-fit: cover;
   }
 
-  .release-art-fallback {
-    position: relative;
+  .release-art::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     z-index: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 45%, transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .release-art.has-cover::after {
+    opacity: 1;
+  }
+
+  .release-art-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 1.5rem;
     text-align: center;
     font-family: 'IM Fell English', serif;
@@ -426,7 +445,15 @@
     font-size: 26px;
     line-height: 1.2;
     color: rgba(0,0,0,0.35);
-    max-width: 12ch;
+    max-width: none;
+    pointer-events: none;
+  }
+
+  .release-art.has-cover .release-art-fallback {
+    align-items: flex-end;
+    padding: 1.25rem 1.5rem 1.5rem;
+    color: rgba(255,255,255,0.92);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.35);
   }
 
   .release-meta {
@@ -1327,7 +1354,7 @@
   <div class="releases-list">
     <div class="release-card">
       <div class="release-art">
-        <img class="release-art-img" src="assets/photos/cover-aakash-chune-chahana.jpg" alt="Aakash Chune Chahana" loading="lazy">
+        <img class="release-art-img" src="assets/images/aakash-coverart.png" alt="Aakash Chune Chahana" loading="lazy">
         <div class="release-art-fallback">Aakash Chune Chahana</div>
       </div>
       <div class="release-meta">
@@ -1342,26 +1369,11 @@
 
     <div class="release-card">
       <div class="release-art">
-        <img class="release-art-img" src="assets/photos/cover-turn-around.jpg" alt="Turn Around" loading="lazy">
-        <div class="release-art-fallback">Turn Around</div>
-      </div>
-      <div class="release-meta">
-        <div class="release-kicker">Single &middot; Coming Soon</div>
-        <div class="release-links">
-          <a href="#" target="_blank" rel="noopener">Spotify</a><!-- replace with Spotify URL -->
-          <a href="#" target="_blank" rel="noopener">Apple Music</a><!-- replace with Apple Music URL -->
-          <a href="#" target="_blank" rel="noopener">YouTube</a><!-- replace with YouTube URL -->
-        </div>
-      </div>
-    </div>
-
-    <div class="release-card">
-      <div class="release-art">
-        <img class="release-art-img" src="assets/photos/cover-mist-and-memories.jpg" alt="Mist &amp; Memories" loading="lazy">
+        <img class="release-art-img" src="assets/images/mist&amp;memories-coverart.png" alt="Mist &amp; Memories" loading="lazy">
         <div class="release-art-fallback">Mist &amp; Memories</div>
       </div>
       <div class="release-meta">
-        <div class="release-kicker">EP &middot; Coming Soon</div>
+        <div class="release-kicker">Album &middot; Coming Soon</div>
         <div class="release-links">
           <a href="#" target="_blank" rel="noopener">Spotify</a><!-- replace with Spotify URL -->
           <a href="#" target="_blank" rel="noopener">Apple Music</a><!-- replace with Apple Music URL -->
@@ -1411,13 +1423,25 @@
   </div>
 </footer><script>
   document.querySelectorAll('.release-art-img').forEach(function (img) {
+    var art = img.closest('.release-art');
+
     function showFallback() {
       img.style.display = 'none';
+      if (art) art.classList.remove('has-cover');
     }
 
-    if (img.complete && img.naturalWidth === 0) {
-      showFallback();
+    function showCover() {
+      if (art) art.classList.add('has-cover');
+    }
+
+    if (img.complete) {
+      if (img.naturalWidth === 0) {
+        showFallback();
+      } else {
+        showCover();
+      }
     } else {
+      img.addEventListener('load', showCover, { once: true });
       img.addEventListener('error', showFallback, { once: true });
     }
   });
