@@ -468,22 +468,6 @@
     margin-top: 0.35rem;
   }
 
-  .release-credits-trigger {
-    background: none;
-    border: none;
-    padding: 0;
-    padding-bottom: 1px;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    border-bottom: 0.5px solid currentColor;
-    transition: opacity 0.2s;
-  }
-
-  .release-credits-trigger:hover {
-    opacity: 0.65;
-  }
-
   .credits-panel-root {
     position: fixed;
     inset: 0;
@@ -1440,7 +1424,7 @@
           <a href="#" target="_blank" rel="noopener">YouTube</a><!-- replace with YouTube URL -->
         </div>
         <div class="release-links release-credits-link">
-          <button type="button" class="release-credits-trigger" data-credits-slug="aakash-chune-chahana">Production Credits</button>
+          <a href="#" class="release-credits-trigger" data-credits-slug="aakash-chune-chahana">Production Credits</a>
         </div>
       </div>
     </div>
@@ -1457,7 +1441,7 @@
           <a href="#" target="_blank" rel="noopener">YouTube</a><!-- replace with YouTube URL -->
         </div>
         <div class="release-links release-credits-link">
-          <button type="button" class="release-credits-trigger" data-credits-slug="mist-and-memories">Production Credits</button>
+          <a href="#" class="release-credits-trigger" data-credits-slug="mist-and-memories">Production Credits</a>
         </div>
       </div>
     </div>
@@ -1541,9 +1525,10 @@
       lastTrigger = null;
     }
 
-    document.querySelectorAll('.release-credits-trigger').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        openCreditsPanel(btn.getAttribute('data-credits-slug'), btn);
+    document.querySelectorAll('.release-credits-trigger').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openCreditsPanel(link.getAttribute('data-credits-slug'), link);
       });
     });
 
