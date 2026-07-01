@@ -552,6 +552,24 @@
     padding-right: 2rem;
   }
 
+  .credits-panel-track {
+    margin-bottom: 2.25rem;
+  }
+
+  .credits-panel-track:last-child {
+    margin-bottom: 0;
+  }
+
+  .credits-panel-track-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--black);
+    margin-bottom: 0.85rem;
+  }
+
   .credits-grid {
     display: flex;
     flex-direction: column;
@@ -1480,7 +1498,74 @@
     },
     'mist-and-memories': {
       title: 'Mist & Memories',
-      credits: []
+      tracks: [
+        {
+          songTitle: 'Combination',
+          credits: [
+            { role: 'Songwriting, Vocals, Acoustic Guitar, Arrangement, Production', names: ['Sushant Shrestha'] },
+            { role: 'Electric Guitar', names: ['Han Jun Ryu'] },
+            { role: 'Bass Guitar', names: ['Andre Vasconcellos'] },
+            { role: 'Acoustic Drums', names: ['Bruno Werner'] },
+            { role: 'Backup Vocals', names: ['Lynsey Tibbs'] },
+            { role: 'Keyboard and Synthesizer', names: ['Felipe Ribeiro'] },
+            { role: 'Session Materials', names: ['Pedro Araujo'] },
+            { role: 'Session Recording', names: ['Musiversal'] }
+          ]
+        },
+        {
+          songTitle: 'Enchanted Eyes',
+          credits: [
+            { role: 'Songwriting, Vocals, Acoustic Guitar, Arrangement, Production', names: ['Sushant Shrestha'] },
+            { role: 'Electric Guitar', names: ['Han Jun Ryu'] },
+            { role: 'Bass Guitar', names: ['Andre Vasconcellos'] },
+            { role: 'Acoustic Drums', names: ['Bruno Werner'] },
+            { role: 'Backup Vocals', names: ['Lynsey Tibbs'] },
+            { role: 'Keyboard and Synthesizer', names: ['Felipe Ribeiro'] },
+            { role: 'Session Materials', names: ['Pedro Araujo'] },
+            { role: 'Session Recording', names: ['Musiversal'] }
+          ]
+        },
+        {
+          songTitle: 'Coffee Cups, Beer Mugs',
+          credits: [
+            { role: 'Songwriting, Vocals, Acoustic Guitar, Arrangement, Production', names: ['Sushant Shrestha'] },
+            { role: 'Electric Guitar', names: ['Han Jun Ryu'] },
+            { role: 'Bass Guitar', names: ['Pablo Arruda'] },
+            { role: 'Acoustic Drums', names: ['Bruno Werner'] },
+            { role: 'Backup Vocals', names: ['Lynsey Tibbs'] },
+            { role: 'Keyboard and Synthesizer', names: ['Felipe Ribeiro'] },
+            { role: 'Session Materials', names: ['Enrico Fallea'] },
+            { role: 'Session Recording', names: ['Musiversal'] }
+          ]
+        },
+        {
+          songTitle: 'Across The Room',
+          credits: [
+            { role: 'Songwriting, Vocals, Acoustic Guitar, Arrangement, Production', names: ['Sushant Shrestha'] },
+            { role: 'Electric Guitar', names: ['Chris Jacobson'] },
+            { role: 'Bass Guitar', names: ['Andre Vasconcellos'] },
+            { role: 'Acoustic Drums', names: ['Bruno Werner'] },
+            { role: 'Backup Vocals', names: ['Lynsey Tibbs'] },
+            { role: 'Keyboard and Synthesizer', names: ['Felipe Ribeiro'] },
+            { role: 'Session Materials', names: ['Joao Bittencourt'] },
+            { role: 'Session Recording', names: ['Musiversal'] }
+          ]
+        },
+        {
+          songTitle: 'Turn Around (As You Walk Away)',
+          credits: [
+            { role: 'Songwriting, Vocals, Acoustic Guitar, Arrangement, Production', names: ['Sushant Shrestha'] },
+            { role: 'Grand Piano', names: ['Antonio Guerra'] },
+            { role: 'Electric Guitar', names: ['Han Jun Ryu'] },
+            { role: 'Bass Guitar', names: ['Andre Vasconcellos'] },
+            { role: 'Acoustic Drums', names: ['Bruno Werner'] },
+            { role: 'Backup Vocals', names: ['Lynsey Tibbs'] },
+            { role: 'Keyboard and Synthesizer', names: ['Felipe Ribeiro'] },
+            { role: 'Session Materials', names: ['Pedro Araujo'] },
+            { role: 'Session Recording', names: ['Musiversal'] }
+          ]
+        }
+      ]
     }
   };
 
@@ -1490,23 +1575,37 @@
     var panelBody = document.getElementById('credits-panel-body');
     var lastTrigger = null;
 
+    function renderCreditRows(credits) {
+      return credits.map(function (entry) {
+        return '<div class="credits-row">' +
+          '<div class="credits-role">' + entry.role + '</div>' +
+          '<div class="credits-name">' + entry.names.join(' · ') + '</div>' +
+          '</div>';
+      }).join('');
+    }
+
     function renderCredits(slug) {
       var release = productionCredits[slug];
       if (!release) return;
 
       panelTitle.textContent = release.title;
 
-      if (!release.credits.length) {
+      if (release.tracks && release.tracks.length) {
+        panelBody.innerHTML = release.tracks.map(function (track) {
+          return '<section class="credits-panel-track">' +
+            '<h3 class="credits-panel-track-title">' + track.songTitle + '</h3>' +
+            '<div class="credits-grid">' + renderCreditRows(track.credits) + '</div>' +
+            '</section>';
+        }).join('');
+        return;
+      }
+
+      if (!release.credits || !release.credits.length) {
         panelBody.innerHTML = '<p class="credits-panel-empty">Credits coming soon</p>';
         return;
       }
 
-      panelBody.innerHTML = '<div class="credits-grid">' + release.credits.map(function (entry) {
-        return '<div class="credits-row">' +
-          '<div class="credits-role">' + entry.role + '</div>' +
-          '<div class="credits-name">' + entry.names.join(' · ') + '</div>' +
-          '</div>';
-      }).join('') + '</div>';
+      panelBody.innerHTML = '<div class="credits-grid">' + renderCreditRows(release.credits) + '</div>';
     }
 
     function openCreditsPanel(slug, trigger) {
