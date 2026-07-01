@@ -464,6 +464,150 @@
     opacity: 0.65;
   }
 
+  .release-credits-link {
+    margin-top: 0.35rem;
+  }
+
+  .release-credits-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    padding-bottom: 1px;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    border-bottom: 0.5px solid currentColor;
+    transition: opacity 0.2s;
+  }
+
+  .release-credits-trigger:hover {
+    opacity: 0.65;
+  }
+
+  .credits-panel-root {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .credits-panel-root.is-open {
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .credits-panel-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    transition: opacity 280ms ease;
+  }
+
+  .credits-panel-root.is-open .credits-panel-backdrop {
+    opacity: 1;
+  }
+
+  .credits-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(100%, 400px);
+    background: var(--white);
+    box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+    transform: translateX(100%);
+    transition: transform 280ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .credits-panel-root.is-open .credits-panel {
+    transform: translateX(0);
+  }
+
+  .credits-panel-close {
+    position: absolute;
+    top: 1.15rem;
+    right: 1.15rem;
+    z-index: 2;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--gray3);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .credits-panel-close:hover {
+    color: var(--black);
+  }
+
+  .credits-panel-inner {
+    overflow-y: auto;
+    flex: 1;
+    padding: 2.75rem 2rem 2rem;
+  }
+
+  .credits-panel-title {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 1.75rem;
+    padding-right: 2rem;
+  }
+
+  .credits-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .credits-row {
+    display: block;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .credits-role {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 10px;
+    line-height: 1.3;
+    letter-spacing: 0.14em;
+    font-weight: 400;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+
+  .credits-name {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.3;
+    color: #111;
+  }
+
+  .credits-panel-empty {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray3);
+  }
+
   .vinyl-wrap {
     float: right;
     margin: -7rem 0 2rem 3rem;
@@ -644,47 +788,6 @@
     color: var(--black);
   }
 
-  .credits-block {
-    margin-top: 4.5rem;
-    max-width: 420px;
-    padding: 1rem 1.1rem;
-    border: 0.5px solid rgba(0,0,0,0.12);
-    background: rgba(0,0,0,0.015);
-  }
-
-  .credits-title {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 200;
-    font-size: 9px;
-    letter-spacing: 0.3em;
-    color: #444;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .credits-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .credits-row {
-    display: block;
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .credits-role {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    font-size: 10px;
-    line-height: 1.3;
-    letter-spacing: 0.14em;
-    font-weight: 400;
-    color: #555;
-    text-transform: uppercase;
-    margin-bottom: 0.1rem;
-  }
-
   .section-num,
   .hero-issue,
   .hero-sub,
@@ -694,21 +797,12 @@
   .ep-intro,
   .vinyl-artist,
   .vinyl-ep-sub,
-  .track-num,
-  .credits-title {
+  .track-num {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     font-size: 11px;
     line-height: 1.5;
     letter-spacing: 0.14em;
     font-weight: 400;
-  }
-
-  .credits-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 13px;
-    line-height: 1.3;
-    color: #111;
   }
 
   /*  ABOUT SECTION  */
@@ -1277,7 +1371,6 @@
     .store-item:last-child { border-bottom: none; }
     .photos-grid { grid-template-columns: 1fr 1fr; }
     .photo-cell.wide { grid-column: span 2; }
-    .credits-block { max-width: none; margin-top: 3rem; }
     .cd-block { min-width: 70px; padding: 1.25rem; }
     .cd-num { font-size: 36px; }
     .hero-title { font-size: 52px; }
@@ -1346,6 +1439,9 @@
           <a href="#" target="_blank" rel="noopener">Apple Music</a><!-- replace with Apple Music URL -->
           <a href="#" target="_blank" rel="noopener">YouTube</a><!-- replace with YouTube URL -->
         </div>
+        <div class="release-links release-credits-link">
+          <button type="button" class="release-credits-trigger" data-credits-slug="aakash-chune-chahana">Production Credits</button>
+        </div>
       </div>
     </div>
 
@@ -1360,49 +1456,108 @@
           <a href="#" target="_blank" rel="noopener">Apple Music</a><!-- replace with Apple Music URL -->
           <a href="#" target="_blank" rel="noopener">YouTube</a><!-- replace with YouTube URL -->
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="credits-block">
-    <div class="credits-title">Production Credits</div>
-    <div class="credits-grid">
-      <div class="credits-row">
-        <div class="credits-role">Songwriting · Vocals · Acoustic Guitar<br>Arrangement · Production</div>
-        <div class="credits-name">Sushant Shrestha</div>
-      </div>
-      <div class="credits-row">
-        <div class="credits-role">Electric Guitar</div>
-        <div class="credits-name">Han Jun Ryu · Chris Jacobson · Davy Bergier</div>
-      </div>
-      <div class="credits-row">
-        <div class="credits-role">Acoustic Drums</div>
-        <div class="credits-name">Bruno Werner</div>
-      </div>
-      <div class="credits-row">
-        <div class="credits-role">Bass Guitar</div>
-        <div class="credits-name">Pablo Arruda · André Vasconcellos</div>
-      </div>
-      <div class="credits-row">
-        <div class="credits-role">Synthesizer</div>
-        <div class="credits-name">Felipe Ribeiro</div>
-      </div>
-      <div class="credits-row">
-        <div class="credits-role">Session Recording</div>
-        <div class="credits-name">Musiversal</div>
-      </div>
-      <div class="credits-row">
-        <div class="credits-role">Session Preparation</div>
-        <div class="credits-name">Pedro Araujo · João Bittencourt</div>
+        <div class="release-links release-credits-link">
+          <button type="button" class="release-credits-trigger" data-credits-slug="mist-and-memories">Production Credits</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<div class="credits-panel-root" id="credits-panel-root" aria-hidden="true">
+  <div class="credits-panel-backdrop" data-credits-close></div>
+  <aside class="credits-panel" role="dialog" aria-modal="true" aria-labelledby="credits-panel-title">
+    <button type="button" class="credits-panel-close" data-credits-close aria-label="Close">&times;</button>
+    <div class="credits-panel-inner">
+      <h2 class="credits-panel-title" id="credits-panel-title"></h2>
+      <div class="credits-panel-body" id="credits-panel-body"></div>
+    </div>
+  </aside>
+</div>
 
 <footer class="site-footer">
   <div class="footer-copy">
     &copy; 2026 Tender Anomalies Music &nbsp;&middot;&nbsp; Pacific Northwest &amp; Bay Area
   </div>
 </footer><script>
+  var productionCredits = {
+    'aakash-chune-chahana': {
+      title: 'Aakash Chune Chahana',
+      credits: [
+        { role: 'Songwriting, Vocals, Acoustic Guitar, Arrangement, Production', names: ['Sushant Shrestha'] },
+        { role: 'Electric Guitar', names: ['Han Jun Ryu'] },
+        { role: 'Bass Guitar', names: ['Bruno Migliari'] },
+        { role: 'Acoustic Drums', names: ['Bruno Werner'] },
+        { role: 'Keyboard and Synthesizer', names: ['Felipe Ribeiro'] },
+        { role: 'Backup Vocals', names: ['Lynsey Tibbs'] },
+        { role: 'Session Materials', names: ['Pedro Araujo'] }
+      ]
+    },
+    'mist-and-memories': {
+      title: 'Mist & Memories',
+      credits: []
+    }
+  };
+
+  (function () {
+    var panelRoot = document.getElementById('credits-panel-root');
+    var panelTitle = document.getElementById('credits-panel-title');
+    var panelBody = document.getElementById('credits-panel-body');
+    var lastTrigger = null;
+
+    function renderCredits(slug) {
+      var release = productionCredits[slug];
+      if (!release) return;
+
+      panelTitle.textContent = release.title;
+
+      if (!release.credits.length) {
+        panelBody.innerHTML = '<p class="credits-panel-empty">Credits coming soon</p>';
+        return;
+      }
+
+      panelBody.innerHTML = '<div class="credits-grid">' + release.credits.map(function (entry) {
+        return '<div class="credits-row">' +
+          '<div class="credits-role">' + entry.role + '</div>' +
+          '<div class="credits-name">' + entry.names.join(' · ') + '</div>' +
+          '</div>';
+      }).join('') + '</div>';
+    }
+
+    function openCreditsPanel(slug, trigger) {
+      renderCredits(slug);
+      lastTrigger = trigger || null;
+      panelRoot.classList.add('is-open');
+      panelRoot.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      panelRoot.querySelector('.credits-panel-close').focus();
+    }
+
+    function closeCreditsPanel() {
+      panelRoot.classList.remove('is-open');
+      panelRoot.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastTrigger) lastTrigger.focus();
+      lastTrigger = null;
+    }
+
+    document.querySelectorAll('.release-credits-trigger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        openCreditsPanel(btn.getAttribute('data-credits-slug'), btn);
+      });
+    });
+
+    panelRoot.querySelectorAll('[data-credits-close]').forEach(function (el) {
+      el.addEventListener('click', closeCreditsPanel);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && panelRoot.classList.contains('is-open')) {
+        closeCreditsPanel();
+      }
+    });
+  })();
+
   document.addEventListener('contextmenu', function (e) {
     e.preventDefault();
   });
