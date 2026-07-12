@@ -555,7 +555,7 @@
   }
   .store-item:hover .store-status { color: rgba(255,255,255,0.3); }
 
-  /*  RELEASE COUNTDOWN  */
+  /*  ALBUM SECTION  */
   .countdown-section {
     background: var(--black);
     color: var(--white);
@@ -565,80 +565,49 @@
     position: relative;
     overflow: hidden;
   }
-  /* Big "TA" typographic mark */
-  .countdown-mark {
-    position: absolute;
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 900;
-    font-size: 35vw;
-    color: rgba(255,255,255,0.02);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1;
-    pointer-events: none;
-    letter-spacing: -0.08em;
-  }
-  .countdown-eyebrow {
+
+  .album-eyebrow {
     font-family: 'Unbounded', sans-serif;
     font-weight: 200;
     font-size: 9px;
     letter-spacing: 0.4em;
     color: rgba(255,255,255,0.2);
     text-transform: uppercase;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     position: relative;
   }
-  .countdown-title {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: clamp(32px, 5vw, 56px);
-    color: var(--white);
-    margin-bottom: 4rem;
-    line-height: 1.1;
-    position: relative;
-  }
-  .countdown-nums {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 0;
-    margin-bottom: 4rem;
-    position: relative;
-  }
-  .cd-block {
-    padding: 2rem 2.5rem;
-    border: 0.5px solid rgba(255,255,255,0.08);
-    border-right: none;
-    min-width: 120px;
-  }
-  .cd-block:last-child { border-right: 0.5px solid rgba(255,255,255,0.08); }
-  .cd-num {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 700;
-    font-size: 52px;
-    color: var(--white);
-    line-height: 1;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  .cd-unit {
+
+  .album-lead {
     font-family: 'Special Elite', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.2);
-    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.35);
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    position: relative;
   }
+
+  .countdown-form-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
   .countdown-form {
     display: flex;
     justify-content: center;
     gap: 0;
-    max-width: 420px;
-    margin: 0 auto;
+    width: 100%;
     border: 0.5px solid rgba(255,255,255,0.15);
     position: relative;
   }
+
   .countdown-form input {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 11rem;
+    width: 100%;
     font-family: 'Special Elite', monospace;
     font-size: 11px;
     letter-spacing: 0.1em;
@@ -648,8 +617,11 @@
     color: var(--white);
     outline: none;
   }
+
   .countdown-form input::placeholder { color: rgba(255,255,255,0.2); }
+
   .countdown-form button {
+    flex: 0 0 auto;
     font-family: 'Unbounded', sans-serif;
     font-size: 8px;
     font-weight: 400;
@@ -663,7 +635,28 @@
     border-left: 0.5px solid rgba(255,255,255,0.15);
     transition: background 0.15s, color 0.15s;
   }
+
   .countdown-form button:hover { background: rgba(255,255,255,0.85); }
+
+  .countdown-form-caption {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  .countdown-form-success {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+  }
 
   /*  PHOTOS SECTION  */
   .photos-section {
@@ -936,7 +929,7 @@
     text-transform: uppercase;
   }
 
-  /*  NEW: EP title sitting above the countdown  */
+  /*  Album title in release section  */
   .ep-title {
     font-family: 'IM Fell English', serif;
     font-style: italic;
@@ -946,7 +939,7 @@
     letter-spacing: -0.02em;
     color: var(--white);
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
   @media (max-width: 700px) {
     .about-section, .connect-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -955,8 +948,6 @@
     .store-item:last-child { border-bottom: none; }
     .photos-grid { grid-template-columns: 1fr 1fr; }
     .photo-cell.wide { grid-column: span 2; }
-    .cd-block { min-width: 70px; padding: 1.25rem; }
-    .cd-num { font-size: 36px; }
     .hero-title { font-size: 52px; }
     .store-grid { border: none; }
     .store-item { border: 1px solid var(--black); margin-bottom: -1px; }
@@ -1022,19 +1013,17 @@
   <div class="marquee" id="marquee"></div>
 </div>
 
-<!--  MIST & MEMORIES — title + countdown  -->
+<!--  MIST & MEMORIES — title + notify  -->
 <section class="countdown-section" id="countdown">
   <div class="ep-title">Mist &amp; Memories</div>
-  <div class="countdown-eyebrow">The Album Drops In</div>
-  <div class="countdown-nums">
-    <div class="cd-block"><span class="cd-num" id="cd-d">--</span><div class="cd-unit">Days</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-h">--</span><div class="cd-unit">Hours</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-m">--</span><div class="cd-unit">Minutes</div></div>
-    <div class="cd-block"><span class="cd-num" id="cd-s">--</span><div class="cd-unit">Seconds</div></div>
-  </div>
-  <div class="countdown-form">
-    <input type="email" placeholder="your@email.com  get notified at release" />
-    <button>Notify me</button>
+  <div class="album-eyebrow">Debut Album &middot; Summer 2026</div>
+  <p class="album-lead">Five songs recorded between Bellevue and a handful of rooms far from here.</p>
+  <div class="countdown-form-wrap" id="notify-form-wrap">
+    <form class="countdown-form" id="notify-form">
+      <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required />
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="countdown-form-caption">get notified at release</p>
   </div>
 </section>
 
@@ -1053,18 +1042,16 @@ m.innerHTML = doubled.map(t =>
   `<div class="marquee-item"><span class="marquee-dot"></span>${t}</div>`
 ).join('');
 
-// COUNTDOWN
-const target = new Date('2026-07-21T00:00:00');
-function tick() {
-  const diff = target - new Date();
-  if (diff <= 0) return;
-  const pad = n => String(n).padStart(2,'0');
-  document.getElementById('cd-d').textContent = pad(Math.floor(diff/864e5));
-  document.getElementById('cd-h').textContent = pad(Math.floor(diff%864e5/36e5));
-  document.getElementById('cd-m').textContent = pad(Math.floor(diff%36e5/6e4));
-  document.getElementById('cd-s').textContent = pad(Math.floor(diff%6e4/1e3));
-}
-tick(); setInterval(tick,1000);
+(function () {
+  var form = document.getElementById('notify-form');
+  var formWrap = document.getElementById('notify-form-wrap');
+  if (!form || !formWrap) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    formWrap.innerHTML = '<p class="countdown-form-success">Thank you. I will let you know.</p>';
+  });
+})();
 </script>
 <footer class="site-footer">
   <div class="footer-copy">
