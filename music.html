@@ -421,54 +421,6 @@
     object-fit: cover;
   }
 
-  .release-art-placeholder {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: 6% 6% 0;
-    background:
-      radial-gradient(120% 90% at 50% 105%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 55%),
-      radial-gradient(90% 70% at 20% 15%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 60%),
-      linear-gradient(170deg, #cfcfcc 0%, #dedddb 42%, #ececeb 100%);
-  }
-
-  .release-art-placeholder::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.05;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-  }
-
-  .placeholder-cover-type {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    font-family: 'IM Fell English', serif;
-    font-size: clamp(11px, 1.55vw, 17px);
-    letter-spacing: 0.04em;
-    color: #2e2e2e;
-    line-height: 1.2;
-  }
-
-  .placeholder-cover-type .pc-title {
-    text-align: right;
-  }
-
-  .release-art.is-placeholder {
-    box-shadow: 0 20px 40px rgba(0,0,0,0.10);
-  }
-
-  .release-art.is-placeholder:hover {
-    transform: none;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.10);
-  }
-
   .release-meta {
     min-width: 0;
     width: min(100%, 416px);
@@ -1480,6 +1432,40 @@
   <div class="releases-list">
     <div class="release-card">
       <div class="release-art">
+        <img class="release-art-img" src="assets/images/mist&amp;memories-coverart.png" alt="Mist &amp; Memories" loading="lazy">
+      </div>
+      <div class="release-meta">
+        <div class="release-kicker">Album &middot; Coming in 2026</div>
+        <div class="release-links">
+          <a href="#" target="_blank" rel="noopener">Spotify</a><!-- replace with Spotify URL -->
+          <a href="#" target="_blank" rel="noopener">Apple Music</a><!-- replace with Apple Music URL -->
+          <a href="#" target="_blank" rel="noopener">YouTube</a><!-- replace with YouTube URL -->
+        </div>
+        <div class="release-links release-credits-link">
+          <a href="#" class="release-credits-trigger" data-credits-slug="mist-and-memories">Production Credits</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="release-card">
+      <div class="release-art">
+        <img class="release-art-img" src="assets/images/schuyler-coverart.png" alt="Schuyler" loading="lazy">
+      </div>
+      <div class="release-meta">
+        <div class="release-kicker">Single &middot; Coming in 2026</div>
+        <div class="release-links">
+          <a href="#" target="_blank" rel="noopener">Spotify</a><!-- replace with Spotify URL -->
+          <a href="#" target="_blank" rel="noopener">Apple Music</a><!-- replace with Apple Music URL -->
+          <a href="#" target="_blank" rel="noopener">YouTube</a><!-- replace with YouTube URL -->
+        </div>
+        <div class="release-links release-credits-link">
+          <a href="#">Production Credits</a><!-- add class="release-credits-trigger" data-credits-slug="schuyler" once credits exist -->
+        </div>
+      </div>
+    </div>
+
+    <div class="release-card">
+      <div class="release-art">
         <img class="release-art-img" src="assets/images/aakash-coverart.png" alt="Aakash Chune Chahana" loading="lazy">
       </div>
       <div class="release-meta">
@@ -1497,46 +1483,18 @@
 
     <div class="release-card">
       <div class="release-art">
-        <img class="release-art-img" src="assets/images/mist&amp;memories-coverart.png" alt="Mist &amp; Memories" loading="lazy">
+        <img class="release-art-img" src="assets/images/fadingechoes-coverart.png" alt="Fading Echoes" loading="lazy">
       </div>
       <div class="release-meta">
-        <div class="release-kicker">Album &middot; Coming in 2026</div>
+        <div class="release-kicker">Album &middot; Coming in 2027</div>
         <div class="release-links">
           <a href="#" target="_blank" rel="noopener">Spotify</a><!-- replace with Spotify URL -->
           <a href="#" target="_blank" rel="noopener">Apple Music</a><!-- replace with Apple Music URL -->
           <a href="#" target="_blank" rel="noopener">YouTube</a><!-- replace with YouTube URL -->
         </div>
         <div class="release-links release-credits-link">
-          <a href="#" class="release-credits-trigger" data-credits-slug="mist-and-memories">Production Credits</a>
+          <a href="#">Production Credits</a><!-- add class="release-credits-trigger" data-credits-slug="fading-echoes" once credits exist -->
         </div>
-      </div>
-    </div>
-
-    <div class="release-card">
-      <div class="release-art is-placeholder">
-        <div class="release-art-placeholder">
-          <div class="placeholder-cover-type">
-            <span class="pc-artist">TENDER ANOMALIES</span>
-            <span class="pc-title">SCHUYLER</span>
-          </div>
-        </div>
-      </div>
-      <div class="release-meta">
-        <div class="release-kicker">Single &middot; Coming in 2026</div>
-      </div>
-    </div>
-
-    <div class="release-card">
-      <div class="release-art is-placeholder">
-        <div class="release-art-placeholder">
-          <div class="placeholder-cover-type">
-            <span class="pc-artist">TENDER ANOMALIES</span>
-            <span class="pc-title">FADING ECHOES</span>
-          </div>
-        </div>
-      </div>
-      <div class="release-meta">
-        <div class="release-kicker">Album &middot; Coming in 2027</div>
       </div>
     </div>
   </div>
